@@ -1,29 +1,225 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-<title> Styling the Web </title>
-<style>
-.myStyle{
-    border: 5px outset blanchedalmond;
-    background-color:lavenderblush;
-    text-align: center;
-}
-</style>
+        <meta charset="UTF-8">
+        <meta http-equiv= "X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mallika Pallipuram Personal Portfolio Website - Demo</title>
+        <link rel="stylesheet" href="style.css">
 </head>
-
+<script src="https://kit.fontawesome.com/93b555f9c1.js" crossorigin="anonymous"></script>
 <body>
 
-<div class="myStyle">
-    <h1>Styling the Web</h1>
-    <p1><a href="https://zoeleblanc.com/is310-computing-humanities-2024/">Visit the IS 310 course website</a></p1>
-    <h2>fun facts about mallika :)</h2>
-    <ul>
-        <li>Dislikes crows</li>
-        <li>Likes Jersey Shore</li>
-    </ul>
+<!---------header--------->
+<div id="header">
+    <div class="container">
+        <nav>
+            <img src="images/pikl2.png" class="logo">
+            <ul id="sidemenu">
+                <i class="fas fa-times" onclick="closemenu()"></i>
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
+        </nav>
+        <div class="header-text">
+            <h1>Hi, I'm <span>Mallika</span><br>Pallipuram</h1>
+        </div>
+    </div>
+</div> 
+
+<!---------about--------->
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="images/moon.png">
+            </div>
+
+            <div class="about-col-2">
+                <h1 class="sub-title">About Me</h1>
+                <p>Hi! My name is Mallika Pallipuram and I am currently
+                    a rising senior in the UIUC iSchool. I can code moderately 
+                    well in several languages, am an eager learner, and possess a childlike
+                    exuberance and zest for life like no other. I am also a very creative person
+                    and have taught myself several forms of art. Scroll to see my portfolio :)<br>
+                    PLEASE HIRE ME !! 
+                </p>
+
+                <div class="tab-titles">
+                    <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                    <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                    <p class="tab-links" onclick="opentab('education')">Education</p>
+                </div>
+
+                <div class="tab-contents active-tab" id="skills">
+                    <ul>
+                        <li><span>Coding</span><br>C++, Python, Java, R, HTML, CSS<br></li>
+                        <li><span>Design</span><br>Adobe Photoshop Illustrator InDesign, Canva<br></li>
+                        <li><span>Art</span><br>Crochetting, Illustrations, Jewellery, Pottery, Gel-X<br></li>
+                    </ul>
+                </div>
+
+                <div class="tab-contents" id="experience">
+                    <ul>
+                        <li><span>UIUC Learning & Language Lab</span><br>Research Assistant, co-authoring paper on disfluencies<br></li>
+                        <li><span>Delta Phi Omega Sorority Inc.</span><br>Sisterhood Chair<br></li>
+                        <li><span>The Collective Magazine</span><br>Graphic Design Intern<br></li>
+                        <li><span>---</span><br>i don't have anything else .0.<br></li>
+                    </ul>
+                </div>
+
+                <div class="tab-contents" id="education">
+                    <ul>
+                        <li><span>University of Illinois Urbana-Champaign</span><br>Bachelors of Science in Information Sciences with a minor in Psychology<br></li>
+                        <li><span>Monta Vista High School</span><br>highschool degree :3<br></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
+<!---------services--------->
+<div id="services">
+    <div class="container">
+        <h1 class="sub-title">My Services</h1>
+        <div class="services-list">
+            <div>
+                <h2>Be the smartiest and funniest and most amazing</h2>
+                <p>What, like it's hard?</p>
+                <a href="#">꒰ᐢ. .ᐢ꒱₊˚⊹</a>
+            </div>
+            <div>
+                <h2>Eat hot chip and lie</h2>
+                <p>Charge they phone</p>
+                <a href="#">Be bi sexual.</a>
+            </div>
+            <div>
+                <h2>Make cool artwork</h2>
+                <p>✶⋆.˚꩜ .ᐟ˙⋆✶</p>
+                <a href="#">Check out my art account!<br>@madebymallika</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!---------portfolio--------->
+<div id="portfolio">
+    <div class="container">
+        <h1 class="sub-title">My Work</h1>
+        <div class="work-list">
+
+            <div class="work">
+                <img src="images/gradient background.jpg">
+                <div class="layer">
+                    <h3>The Collective Magazine</h3>
+                    <p>Merchandise and page design for the Collective Magazine</p>
+                    <a href="#"></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/auroa.jpg">
+                <div class="layer">
+                    <h3>ΔΦΩ</h3>
+                    <p>Posters for events for Delta Phi Omega Sorority Inc.</p>
+                    <a href="#"></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/background.jpg">
+                <div class="layer">
+                    <h3>Personal Projects</h3>
+                    <p>Just for fun :)</p>
+                    <a href="#"></a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<!---------contact--------->
+<div id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me!</h1>
+                <div class="contact-list">
+                    <ul>
+                        <li><a href="https://www.linkedin.com/in/mallika-pallipuram-b628011b0/">LinkedIn</a></li>
+                        <li><a href="https://github.com/m4ll1ka">GitHub</a></li>
+                        <li><a href="https://www.instagram.com/madebymaaallika/">@madebymaaallika</a></li>
+                        <li><a href="mailto:mallikapallipuram@gmail.com">mallikapallipuram@gmail.com</a></li>
+                    </ul>
+                </div>
+                <a href="images/Mallika Pallipuram Resume SP24.pdf" download class="btn">Download CV</a>
+            </div>
+            <div class="contact-right">
+                <form name="submit-to-google-sheet" id="myForm">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="5" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn">Submit</button> 
+                </form>
+                <span id="msg"></span>
+            </div>        
+        </div>
+    </div>
+    <div class="copyright">
+        <p>Copyright © Mallika Pallipuram 2024.</p>
+    </div>
+</div>
+
+<script>
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents"); 
+    
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link"); //removes active class name (active link)
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab"); //removes tab contents from active tab
+        }
+        event.currentTarget.classList.add("active-link"); //adding the active link and display the color
+        document.getElementById(tabname).classList.add("active-tab"); 
+        //sends edu/experience/skills to func, searches based on that tabname, then adds that active tab info
+    }
+</script>
+
+<script>
+
+    var sidemenu = document.getElementById("sidemenu");
+
+    function openmenu(){
+        sidemenu.style.right = "0"; //whenever right = 0 sidemenu can be seen
+    }
+
+    function closemenu(){
+        sidemenu.style.right = "-200px";
+    }
+</script>
+
+<script>
+    const scriptURL = '<https://script.google.com/macros/s/AKfycbxLaYNiNb3_moe9s_2qpG7lRQxh3sViA35e0ohM5eBGvgFAuNHh7DrnF6fct9oM2c5s/exec>'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+    
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            msg.innerHTML = "Message sent Successfully!"
+            setTimeout(function(){
+                msg.innerHTML = ""
+            }, 5000)
+            form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
 
 </body>
 </html>
-
