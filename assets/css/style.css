@@ -14,7 +14,7 @@ body{
 #header{
     width: 100%;
     height: 100vh;
-    background-image: url(images/headshot-cmp.png);
+    background-image: url(https://github.com/m4ll1ka/m4ll1ka.github.io/blob/f2770dbe1f1d3b46e95d40084cc64d8f3d55498c/docs/assets/images/headshot-cmp.png);
     background-size: cover;
     background-position: center;
 }
@@ -309,7 +309,7 @@ nav .fas{
 
 @media only screen and (max-width:600px){
     #header{
-        background-image: url(images/headshot-phone.png);
+        background-image: url(https://github.com/m4ll1ka/m4ll1ka.github.io/blob/f2770dbe1f1d3b46e95d40084cc64d8f3d55498c/docs/assets/images/headshot-phone.png);
     }
     .header-text{
         margin-top: 100%;
