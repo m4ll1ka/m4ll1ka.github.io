@@ -8,8 +8,8 @@ html{
     scroll-behavior: smooth;
 }
 body{
-    background: #ECE2D0;
-    color: #582C4D;
+    background: linear-gradient(135deg, #ffebcd, #ffc1cc);
+    color: #333;
 }
 #header{
     width: 100%;
