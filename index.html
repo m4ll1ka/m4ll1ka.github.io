@@ -5,7 +5,8 @@
         <meta http-equiv= "X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Mallika Pallipuram</title>
-        <link rel="stylesheet" type="text/css" href="https://m4ll1ka.github.io/docs/assets/css/style.css">
+        <link rel="stylesheet" href="https://m4ll1ka.github.io/docs/assets/css/style.css">
+        <link rel="stylesheet" href="https://use.typekit.net/xeq6kow.css">
         <link rel="icon" type="image/png" href="https://m4ll1ka.github.io/docs/assets/images/melogopng.png">
 </head>
 <script src="https://kit.fontawesome.com/93b555f9c1.js" crossorigin="anonymous"></script>
@@ -13,21 +14,37 @@
 
 <!---------header--------->
 <div id="header">
-    <div class="container">
+    <div class="container-h">
         <nav>
-            <!---<img src="https://m4ll1ka.github.io/docs/assets/images/pikl2.png" class="logo">--->
+            <img src="https://m4ll1ka.github.io/docs/assets/images/melogopng.png" class="logo">
             <ul id="sidemenu">
                 <i class="fas fa-times" onclick="closemenu()"></i>
                 <li><a href="#header">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#projects.html">Projects</a></li>
+                <li><a href="art.html">Art</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <i class="fas fa-bars" onclick="openmenu()"></i>
         </nav>
-        <div class="header-text">
-            <h1>Hi, I'm <span>Mallika</span><br>Pallipuram</h1>
+
+        <div class="header-row">
+                <div class="header-col1">
+                    <div class="text-wrapper">
+                        <h1 class="header-text">Hi! My name is <br><span>Mallika</span></h1>
+                    </div>
+                </div>
+                <div class="header-col2">
+                    <img src="https://m4ll1ka.github.io/docs/assets/images/pic.png" class= "header-image">
+                </div>
         </div>
+
+        <div class="header-paragraph">
+            <p> I am currently a senior at the University of Illinois 
+                Urbana-Champaign majoring in Information Sciences 
+                with a minor in Psychology. My diverse and interdisciplinary 
+                background sparked my interest in the intersection between: 
+            </p>
+        </div>        
     </div>
 </div> 
 
@@ -35,122 +52,24 @@
 <div id="about">
     <div class="container">
         <div class="row">
-            <div class="about-col-1">
-                <img src="https://m4ll1ka.github.io/docs/assets/images/moon.png">
+            <div class="technology">
+                <h1 class="sub-title">Technology</h1>
+                <p>major+classwork</p>
             </div>
 
-            <div class="about-col-2">
-                <h1 class="sub-title">About Me</h1>
-                <p>Hi! My name is Mallika Pallipuram and I am currently
-                    a senior at the University of Illinois Urbana-Champaign majoring 
-                        in Information Sciences with a minor in Psychology.
-                </p>
-
-                <div class="tab-titles">
-                    <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
-                    <p class="tab-links" onclick="opentab('experience')">Experience</p>
-                    <p class="tab-links" onclick="opentab('education')">Education</p>
-                </div>
-
-                <div class="tab-contents active-tab" id="skills">
-                    <ul>
-                        <li><span>Coding</span><br>C++, Python, Java, R, HTML, CSS, ELAN<br></li>
-                        <li><span>Design</span><br>Adobe Photoshop Illustrator InDesign, Canva<br></li>
-                        <li><span>Art</span><br>Illustrations, Jewellery, Crochet, Gel-X nails<br></li>
-                    </ul>
-                </div>
-
-                <div class="tab-contents" id="experience">
-                    <ul>
-                        <li><span>UIUC Learning & Language Lab</span><br>Research Assistant, co-authoring paper on disfluencies<br></li>
-                        <li><span>Delta Phi Omega Sorority Inc.</span><br>Sisterhood Chair<br></li>
-                        <li><span>The Collective Magazine</span><br>Graphic Design Intern<br></li>
-                    </ul>
-                </div>
-
-                <div class="tab-contents" id="education">
-                    <ul>
-                        <li><span>University of Illinois Urbana-Champaign</span><br>Bachelors of Science in Information Sciences with a minor in Psychology<br></li>
-                        <li><span>Monta Vista High School</span></li>
-                    </ul>
-                </div>
-
+            <div class="art">
+                <h1 class="sub-title">Artistry</h1>  
+                <p>collective+dpo, my artwork</p>
             </div>
+
+            <div class="research">
+                <h1 class="sub-title">Research</h1>
+                <p>LeLaLab</p>
+            </div>  
+
         </div>
     </div>
 </div>
-
-<!---------portfolio--------->
-<div id="portfolio">
-        <h1 class="sub-title">My Work</h1>
-            <div class="work-list">
-                <div class="work">
-                    <img src="https://m4ll1ka.github.io/docs/assets/images/Mallika Butterfly Sticker.png">
-                    <div class="layer">
-                        <h3>The Collective Magazine Fall 2023</h3>
-                        <p>Butterfly sticker</p>
-                        <a href="#"></a>
-                    </div>
-                </div>
-                <div class="work">
-                    <img src="https://m4ll1ka.github.io/docs/assets/images/MallikaPallipuram.FountainOfYouth3.CollectiveSP22.jpg">
-                    <div class="layer">
-                        <h3>The Collective Magazine Spring 2022</h3>
-                        <p>Fountain of Youth Poster</p>
-                        <a href="#"></a>
-                    </div>
-                </div>
-                <div class="work">
-                    <img src="https://m4ll1ka.github.io/docs/assets/images/Mallika Cherry Sticker.png">
-                    <div class="layer">
-                        <h3>The Collective Magazine Fall 2023</h3>
-                        <p>Cherry sticker</p>
-                        <a href="#"></a>
-                    </div>
-                </div>
-                <div class="work">
-                    <img src="https://m4ll1ka.github.io/docs/assets/images/PAGE.png">
-                    <div class="layer">
-                        <h3>The Collective Magazine Spring 2022</h3>
-                        <p>Page design for the Spring 22 issue</p>
-                        <a href="#"></a>
-                    </div>
-                </div>
-                <div class="work">
-                    <img src="https://m4ll1ka.github.io/docs/assets/images/galentines.jpg">
-                    <div class="layer">
-                        <h3>Delta Phi Omega Spring 2023</h3>
-                        <p>Certificate for an event</p>
-                        <a href="#"></a>
-                    </div>
-                </div>
-                <div class="work">
-                    <img src="https://m4ll1ka.github.io/docs/assets/images/dpo merch 1 fa24.png">
-                    <div class="layer">
-                        <h3>Delta Phi Omega Fall 2024</h3>
-                        <p>Fall Merch Design</p>
-                        <a href="#"></a>
-                    </div>
-                </div>
-                <div class="work">
-                    <img src="https://m4ll1ka.github.io/docs/assets/images/dpo merch 2 fa24.png">
-                    <div class="layer">
-                        <h3>Delta Phi Omega Fall 2024</h3>
-                        <p>Fall Merch Design</p>
-                        <a href="#"></a>
-                    </div>
-                </div>
-                <div class="work">
-                    <img src="https://m4ll1ka.github.io/docs/assets/images/dpo merch 3 fa24.jpg">
-                    <div class="layer">
-                        <h3>Delta Phi Omega Fall 2024</h3>
-                        <p>Fall Merch Design</p>
-                        <a href="#"></a>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
         
 <!---------contact--------->
 <div id="contact">
