@@ -210,17 +210,25 @@ body {
     padding: 80px;
     color: #4A5759;
 }
-.row{
+.row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
+    gap: 40px;
 }
+
 .column {
-  float: left;
-  width: 33.33%;
-  padding: 10px;
-  height: 300px; 
+    flex: 1;
+    min-width: 280px;
 }
+
+.column img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
 .sub-title{
     font-family: "norman-variable", sans-serif;
     font-variation-settings: "wght" 520;
@@ -415,4 +423,5 @@ nav .fas{
     margin-top: -40px;
     display: block;
 }
+
 
