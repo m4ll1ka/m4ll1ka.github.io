@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play — Mallika Pallipuram</title>
+    <link rel="stylesheet" href="https://m4ll1ka.github.io/docs/assets/css/style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/xeq6kow.css">
+    <link rel="icon" type="image/png" href="https://m4ll1ka.github.io/docs/assets/images/melogopng.png">
+    <style>
+        /* Play page specific styles */
+        #play-hero {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #play-hero::before {
+            content: 'PLAY';
+            position: absolute;
+            bottom: -4%;
+            left: -2%;
+            font-family: fields, sans-serif;
+            font-weight: 200;
+            font-size: clamp(140px, 24vw, 320px);
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(0, 184, 184, 0.08);
+            line-height: 1;
+            pointer-events: none;
+            z-index: 0;
+            letter-spacing: -0.05em;
+        }
+
+        .play-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 5% 80px;
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .play-title {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-style: italic;
+            font-size: clamp(52px, 8vw, 108px);
+            font-weight: 400;
+            color: var(--ink);
+            line-height: 1.0;
+            margin-bottom: 40px;
+            letter-spacing: -0.02em;
+        }
+
+        .play-desc {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(20px, 2.5vw, 32px);
+            line-height: 1.6;
+            color: var(--ink);
+            opacity: 0.75;
+            margin-bottom: 60px;
+            max-width: 700px;
+        }
+
+        .section-label-center {
+            font-family: fields, sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 80px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .section-label-center::before,
+        .section-label-center::after {
+            content: '';
+            height: 1px;
+            background: var(--teal);
+            opacity: 0.3;
+            width: 60px;
+        }
+
+        .projects-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            max-width: 700px;
+        }
+
+        .project-card {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            position: relative;
+            transition: all 0.3s ease;
+            background: var(--paper);
+            cursor: none;
+            text-decoration: none;
+            display: block;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid var(--teal);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .project-card:hover {
+            border-color: var(--teal);
+            transform: translateY(-4px);
+        }
+
+        .project-card:hover::before {
+            opacity: 0.2;
+        }
+
+        .project-number {
+            font-family: fields, sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .project-title {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-style: italic;
+            font-size: clamp(28px, 4vw, 44px);
+            font-weight: 400;
+            color: var(--ink);
+            margin-bottom: 16px;
+            line-height: 1.2;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .project-arrow {
+            font-size: 28px;
+            color: var(--teal);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-arrow {
+            transform: translateX(6px);
+        }
+
+        .project-desc {
+            font-family: fields, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--ink);
+            opacity: 0.6;
+            font-weight: 300;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .play-content {
+                padding: 100px 5% 60px;
+            }
+
+            .play-title {
+                font-size: 42px;
+            }
+
+            .play-desc {
+                font-size: 18px;
+            }
+
+            .project-card {
+                padding: 32px 24px;
+            }
+
+            .project-card::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<script src="https://kit.fontawesome.com/93b555f9c1.js" crossorigin="anonymous"></script>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!---------header--------->
+<div id="play-hero">
+    <nav>
+        <img src="https://m4ll1ka.github.io/docs/assets/images/melogopng.png" class="logo">
+        <ul id="sidemenu">
+            <i class="fas fa-times" onclick="closemenu()"></i>
+            <li><a href="index.html">About</a></li>
+            <li><a href="https://readymag.website/u497443308/6099553/work/">Work</a></li>
+            <li><a href="play.html">Play</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <i class="fas fa-bars" onclick="openmenu()"></i>
+    </nav>
+
+    <div class="play-content">
+        <h1 class="play-title">Play</h1>
+        
+        <p class="play-desc">
+            Recent side quests and hyperfixations that have sparked my interest — 
+            experiments, explorations, and creative detours that don't quite fit in the work section.
+        </p>
+
+        <p class="section-label-center">Projects</p>
+
+        <div class="projects-grid">
+            <a href="bag.html" class="project-card">
+                <span class="project-number">01</span>
+                <h2 class="project-title">
+                    What's in my bag!
+                    <span class="project-arrow">→</span>
+                </h2>
+                <p class="project-desc">
+                    A peek into the everyday essentials I carry — organized chaos documented.
+                </p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!---------footer--------->
+<div style="background: var(--ink); padding: 40px 5%; text-align: center;">
+    <p style="font-family: fields, sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(242,237,228,0.2);">
+        © Mallika Pallipuram 2026 — All rights reserved
+    </p>
+</div>
+
+<!---------scripts--------->
+<script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let ringX = 0, ringY = 0, curX = 0, curY = 0;
+
+    document.addEventListener('mousemove', e => {
+        curX = e.clientX; curY = e.clientY;
+        cursor.style.left = curX + 'px';
+        cursor.style.top = curY + 'px';
+    });
+
+    function animateRing() {
+        ringX += (curX - ringX) * 0.12;
+        ringY += (curY - ringY) * 0.12;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    document.querySelectorAll('a, button, .btn, .logo, .project-card').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.width = '20px';
+            cursor.style.height = '20px';
+            ring.style.width = '50px';
+            ring.style.height = '50px';
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.style.width = '10px';
+            cursor.style.height = '10px';
+            ring.style.width = '32px';
+            ring.style.height = '32px';
+        });
+    });
+</script>
+
+<script>
+    var sidemenu = document.getElementById("sidemenu");
+    function openmenu() { sidemenu.style.right = "0"; }
+    function closemenu() { sidemenu.style.right = "-240px"; }
+</script>
+
+<!-- Grain texture canvas -->
+<script>
+    const canvas = document.createElement('canvas');
+    canvas.width = 300;
+    canvas.height = 300;
+    canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9997;opacity:0.4;';
+    const ctx = canvas.getContext('2d');
+    const imageData = ctx.createImageData(300, 300);
+    for (let i = 0; i < imageData.data.length; i += 4) {
+        const val = Math.random() * 255;
+        imageData.data[i] = val;
+        imageData.data[i+1] = val;
+        imageData.data[i+2] = val;
+        imageData.data[i+3] = 18;
+    }
+    ctx.putImageData(imageData, 0, 0);
+    document.body.appendChild(canvas);
+</script>
+
+</body>
+</html>
