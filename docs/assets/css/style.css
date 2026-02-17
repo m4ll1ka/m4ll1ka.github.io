@@ -1,3 +1,8 @@
+/* ============================================
+   MALLIKA PALLIPURAM
+   i-D magazine × downtown gallery × zine
+   ============================================ */
+
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 
 :root {
@@ -225,7 +230,7 @@ nav .fas { display: none; font-size: 20px; }
     font-family: 'Instrument Serif', Georgia, serif;
     font-style: italic;
     font-weight: 400;
-    font-size: clamp(30px, 4.5vw, 68px);
+    font-size: clamp(38px, 6vw, 90px);
     color: var(--ink);
     line-height: 1.3;
 }
@@ -265,32 +270,6 @@ nav .fas { display: none; font-size: 20px; }
 @keyframes nudge {
     0%, 100% { transform: translateY(0); opacity: 0.3; }
     50% { transform: translateY(7px); opacity: 0.55; }
-}
-
-/* ============================================
-   MARQUEE TICKER
-   ============================================ */
-.marquee-strip {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 14px 0;
-    overflow: hidden;
-    white-space: nowrap;
-    position: relative;
-    z-index: 2;
-}
-.marquee-inner {
-    display: inline-block;
-    animation: marquee 20s linear infinite;
-    font-family: fields, sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-}
-.marquee-inner span { margin: 0 36px; color: var(--teal); }
-@keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
 }
 
 /* ============================================
