@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="UTF-8">
-        <meta http-equiv= "X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Mallika Pallipuram</title>
-        <link rel="stylesheet" href="https://m4ll1ka.github.io/docs/assets/css/style.css">
-        <link rel="stylesheet" href="https://use.typekit.net/xeq6kow.css">
-        <link rel="icon" type="image/png" href="https://m4ll1ka.github.io/docs/assets/images/melogopng.png">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mallika Pallipuram</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.typekit.net/xeq6kow.css">
+    <link rel="icon" type="image/png" href="https://m4ll1ka.github.io/docs/assets/images/melogopng.png">
 </head>
 <script src="https://kit.fontawesome.com/93b555f9c1.js" crossorigin="anonymous"></script>
 <body>
 
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
 <!---------header--------->
 <div id="header">
+    <div class="header-rule-top"></div>
+    <span class="header-issue">Portfolio 2026 — HCI Designer & Creative Technologist</span>
+
     <div class="container-h">
         <nav>
             <img src="https://m4ll1ka.github.io/docs/assets/images/melogopng.png" class="logo">
@@ -28,41 +35,43 @@
         </nav>
 
         <div class="header-row">
-                <div class="header-col1">
-                    <h1 class="header-text">Hi! My name is <br>
-    <span id="nameDisplay" style="display: inline-flex; gap: 12px; align-items: center;"></span>
-</h1>
-                </div>
-        </div>       
+            <div class="header-col1">
+                <h1 class="header-text">
+                    Hi! My name is</span>
+                    <br>
+                    <span id="nameDisplay"></span>
+                </h1>
+            </div>
+        </div>
     </div>
-</div> 
+</div>
 
 <!---------about--------->
 <div id="about">
-        
-        <div class="row">
-                <div class="column">
-                        <div class="header-paragraph">
-                            <p> I am a designer and aspiring creative technologist that loves building cool stuff! 
-                            I explore the complexities of human behavior and build digital experiences that 
-                            center people's needs, values, and the broader impact design has on their lives.  
-                            </p>
-                        </div> 
-                </div>
-                       
-                <div class="column">
-                        <img src="https://m4ll1ka.github.io/docs/assets/images/interests.png" alt="venn diagram of my interests">
-                </div>
-                
+    <p class="section-label">About</p>
+    <div class="about-row">
+        <div class="about-text">
+            <p>
+                I am a designer and aspiring creative technologist that loves
+                <span class="highlight">building cool stuff.</span>
+                I explore the complexities of human behavior and build
+                <em>digital experiences</em> that center people's needs, values,
+                and the broader impact design has on their lives.
+            </p>
         </div>
+        <div class="about-image">
+            <img src="https://m4ll1ka.github.io/docs/assets/images/my_work.png" alt="venn diagram of my interests">
+        </div>
+    </div>
 </div>
-        
+
 <!---------contact--------->
 <div id="contact">
     <div class="container">
+        <p class="section-label">Contact</p>
         <div class="row">
             <div class="contact-left">
-                <h1 class="sub-title">Contact Me!</h1>
+                <h1 class="sub-title">Let's talk.</h1>
                 <div class="contact-list">
                     <ul>
                         <li><a href="https://www.linkedin.com/in/mallika-pallipuram-b628011b0/">LinkedIn</a></li>
@@ -71,117 +80,105 @@
                         <li><a href="mailto:mallikapallipuram@gmail.com">mallikapallipuram@gmail.com</a></li>
                     </ul>
                 </div>
-                <a href="https://m4ll1ka.github.io/docs/assets/images/Mallika Pallipuram Resume FA25.pdf" target="_blank" class="btn">Resume</a>
+                <a href="https://m4ll1ka.github.io/docs/assets/images/Mallika Pallipuram Resume FA25.pdf" target="_blank" class="btn">Resume ↗</a>
             </div>
             <div class="contact-right">
                 <form name="submit-to-google-sheet" id="myForm">
                     <input type="text" name="Name" placeholder="Your Name" required>
                     <input type="email" name="email" placeholder="Your Email" required>
                     <textarea name="Message" rows="5" placeholder="Your Message"></textarea>
-                    <button type="submit" class="btn">Submit</button> 
+                    <button type="submit" class="btn">Send it →</button>
                 </form>
                 <span id="msg"></span>
-            </div>        
+            </div>
         </div>
     </div>
     <div class="copyright">
-        <p>Copyright © Mallika Pallipuram 2026.</p>
+        <p>© Mallika Pallipuram 2026</p>
     </div>
 </div>
 
+<!---------scripts--------->
 <script>
-    var tablinks = document.getElementsByClassName("tab-links");
-    var tabcontents = document.getElementsByClassName("tab-contents"); 
-    
-    function opentab(tabname){
-        for(tablink of tablinks){
-            tablink.classList.remove("active-link"); //removes active class name (active link)
-        }
-        for(tabcontent of tabcontents){
-            tabcontent.classList.remove("active-tab"); //removes tab contents from active tab
-        }
-        event.currentTarget.classList.add("active-link"); //adding the active link and display the color
-        document.getElementById(tabname).classList.add("active-tab"); 
-        //sends edu/experience/skills to func, searches based on that tabname, then adds that active tab info
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let ringX = 0, ringY = 0, curX = 0, curY = 0;
+
+    document.addEventListener('mousemove', e => {
+        curX = e.clientX; curY = e.clientY;
+        cursor.style.left = curX + 'px';
+        cursor.style.top = curY + 'px';
+    });
+
+    // Ring follows with lag
+    function animateRing() {
+        ringX += (curX - ringX) * 0.12;
+        ringY += (curY - ringY) * 0.12;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animateRing);
     }
+    animateRing();
+
+    // Cursor grows on hover
+    document.querySelectorAll('a, button, .btn, .logo').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.width = '20px';
+            cursor.style.height = '20px';
+            ring.style.width = '50px';
+            ring.style.height = '50px';
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.style.width = '10px';
+            cursor.style.height = '10px';
+            ring.style.width = '32px';
+            ring.style.height = '32px';
+        });
+    });
 </script>
 
 <script>
-
     var sidemenu = document.getElementById("sidemenu");
-
-    function openmenu(){
-        sidemenu.style.right = "0"; //whenever right = 0 sidemenu can be seen
-    }
-
-    function closemenu(){
-        sidemenu.style.right = "-200px";
-    }
+    function openmenu() { sidemenu.style.right = "0"; }
+    function closemenu() { sidemenu.style.right = "-240px"; }
 </script>
 
 <script>
-    const scriptURL = '<https://script.google.com/macros/s/AKfycbxLaYNiNb3_moe9s_2qpG7lRQxh3sViA35e0ohM5eBGvgFAuNHh7DrnF6fct9oM2c5s/exec>'
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxLaYNiNb3_moe9s_2qpG7lRQxh3sViA35e0ohM5eBGvgFAuNHh7DrnF6fct9oM2c5s/exec'
     const form = document.forms['submit-to-google-sheet']
     const msg = document.getElementById("msg")
-    
-    form.addEventListener('submit', e => {
-      e.preventDefault()
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => {
-            msg.innerHTML = "Message sent Successfully!"
-            setTimeout(function(){
-                msg.innerHTML = ""
-            }, 5000)
-            form.reset()
-        })
-        .catch(error => console.error('Error!', error.message))
-    })
-  </script>
 
+    form.addEventListener('submit', e => {
+        e.preventDefault()
+        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+            .then(() => {
+                msg.innerHTML = "Message sent successfully!"
+                setTimeout(() => { msg.innerHTML = "" }, 5000)
+                form.reset()
+            })
+            .catch(error => console.error('Error!', error.message))
+    })
+</script>
+
+<!---------name animation--------->
 <script>
 (function() {
-    const SCRAMBLE_SPEED = 200;      // Ms between image changes
-    const REVEAL_START_DELAY = 2000; // When first syllable locks in ms
-    const REVEAL_SYLLABLE_GAP = 700; // Time between each syllable locking in ms
-    const IMAGE_HEIGHT = 80;        
+    const SCRAMBLE_SPEED = 200;
+    const REVEAL_START_DELAY = 2000;
+    const REVEAL_SYLLABLE_GAP = 700;
+    const IMAGE_HEIGHT = 200;
     const BASE_IMAGE_PATH = 'https://m4ll1ka.github.io/docs/assets/images/animation/';
 
-    // Images for each syllable
     const syllableImageVariants = [
-         // Syllable 0: "ma"
-        [
-            'cursive_ma.png', // Ma (English cursive)
-            'hindi_ma.png', // म (Hindi/Devanagari)
-            'malayalam_ma.png', // മ (Malayalam)
-            'kannada_ma.png', // ಮ (Kannada)
-            'eng_ma.png', // Ma (English handwritten) 
-        ],
-
-        // Syllable 1: "lli"
-        [
-            'cursive_li.png', // lli (English cursive)
-            'hindi_li.png', // ल्लि (Hindi/Devanagari)
-            'malayalam_li.png', // ല്ലി (Malayalam)
-            'kannada_li.png', // ಲ್ಲಿ (Kannada)
-            'eng_li.png', // lli (English handwritten)
-        ],
-
-        // Syllable 2: "ka"
-        [
-            // Position 2: ka
-            'cursive_ka.png', // ka (English cursive)
-            'hindi_ka.png', // क (Hindi/Devanagari)
-            'malayalam_ka.png', // ക (Malayalam)
-            'kannada_ka.png', // ಕ (Kannada)
-            'eng_ka.png', // ka (English handwritten) 
-        ],
+        ['cursive_ma.png', 'hindi_ma.png', 'malayalam_ma.png', 'kannada_ma.png', 'eng_ma.png'],
+        ['cursive_li.png', 'hindi_li.png', 'malayalam_li.png', 'kannada_li.png', 'eng_li.png'],
+        ['cursive_ka.png', 'hindi_ka.png', 'malayalam_ka.png', 'kannada_ka.png', 'eng_ka.png'],
     ];
 
-    // Which variant to show when each syllable locks in (before the final name appears)
     const FINAL_VARIANT_INDEX = 0;
-
-    // final full name image that replaces everything at the very end
-    const FINAL_NAME_IMAGE = 'final_text.png'; 
+    const FINAL_NAME_IMAGE = 'final_text.png';
+    const FINAL_NAME_IMAGE_HEIGHT = IMAGE_HEIGHT;
 
     let revealedIndices = new Set();
     let imageElements = [];
@@ -191,26 +188,17 @@
     function init() {
         const displayElement = document.getElementById('nameDisplay');
         if (!displayElement || displayElement.hasChildNodes()) return;
+        displayElement.style.cssText = 'display: inline-flex; gap: 8px; align-items: center; justify-content: center;';
 
         syllableImageVariants.forEach((variants, index) => {
             const img = document.createElement('img');
-            img.style.cssText = `
-                height: ${IMAGE_HEIGHT}px;
-                width: auto;
-                transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
-                opacity: 0.8;
-            `;
-            //filter: brightness(0.8) saturate(0.7);
+            img.style.cssText = `height: ${IMAGE_HEIGHT}px; width: auto; transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease; opacity: 0.8;`;
             img.src = BASE_IMAGE_PATH + variants[0];
             img.alt = 'syllable-' + index;
-
-            // Red tint if image fails to load — helps catch filename typos
-            img.onerror = function() {
+            img.onerror = function () {
                 this.style.cssText += 'background: rgba(255,0,0,0.3); border-radius: 4px; min-width: 40px;';
-                this.alt = 'missing: ' + variants[0];
                 console.error('Image not found:', BASE_IMAGE_PATH + variants[0]);
             };
-
             displayElement.appendChild(img);
             imageElements.push(img);
         });
@@ -225,9 +213,7 @@
 
     function updateScramble() {
         imageElements.forEach((img, index) => {
-            if (!revealedIndices.has(index)) {
-                img.src = getRandomVariantImage(index);
-            }
+            if (!revealedIndices.has(index)) img.src = getRandomVariantImage(index);
         });
     }
 
@@ -235,62 +221,29 @@
         revealedIndices.add(index);
         const img = imageElements[index];
         img.src = BASE_IMAGE_PATH + syllableImageVariants[index][FINAL_VARIANT_INDEX];
-        img.style.cssText = `
-            height: ${IMAGE_HEIGHT}px;
-            width: auto;
-            transition: opacity 0.2s ease, filter 0.2s ease, transform 0.2s ease;
-            filter: brightness(1) saturate(1) drop-shadow(0 0 10px rgba(52, 196, 235, 0.5));
-            opacity: 1;
-            transform: scale(1.05);
-        `;
-        // purple: (147, 51, 234, 0.5)
-        // Once all syllables are revealed, swap to the full cursive name
+        img.style.cssText = `height: ${IMAGE_HEIGHT}px; width: auto; transition: opacity 0.2s ease, filter 0.2s ease, transform 0.2s ease; filter: brightness(1) saturate(1) drop-shadow(0 0 10px rgba(0, 184, 184, 0.6)); opacity: 1; transform: scale(1.05);`;
         if (revealedIndices.size === SYLLABLE_COUNT) {
             clearInterval(scrambleInterval);
-            setTimeout(showFinalName, 600); // short pause before the swap -- 2
+            setTimeout(showFinalName, 200);
         }
     }
 
     function showFinalName() {
         const displayElement = document.getElementById('nameDisplay');
-
-        // Fade all syllable images out
-        imageElements.forEach(img => {
-            img.style.opacity = '0';
-            img.style.transform = 'scale(0.95)';
-        });
-
-        // After fade out, replace with the full name image
+        imageElements.forEach(img => { img.style.opacity = '0'; img.style.transform = 'scale(0.95)'; });
         setTimeout(() => {
             displayElement.innerHTML = '';
-
             const finalImg = document.createElement('img');
             finalImg.src = BASE_IMAGE_PATH + FINAL_NAME_IMAGE;
             finalImg.alt = 'Mallika';
-            finalImg.style.cssText = `
-                height: ${IMAGE_HEIGHT}px;
-                width: auto;
-                opacity: 0;
-                transition: opacity 0.2s ease, transform 0.2s ease;
-                transform: scale(0.95);
-                filter: drop-shadow(0 0 12px rgba(52, 196, 235, 0.5));
-            `;
-            finalImg.onerror = function() {
-                this.style.cssText += 'background: rgba(255,0,0,0.3); border-radius: 4px; min-width: 100px;';
-                console.error('Final image not found:', BASE_IMAGE_PATH + FINAL_NAME_IMAGE);
-            };
+            finalImg.style.cssText = `height: ${FINAL_NAME_IMAGE_HEIGHT}px; width: auto; opacity: 0; transition: opacity 0.6s ease, transform 0.6s ease; transform: scale(0.95); filter: drop-shadow(0 0 12px rgba(0, 184, 184, 0.5));`;
+            finalImg.onerror = function () { console.error('Final image not found:', BASE_IMAGE_PATH + FINAL_NAME_IMAGE); };
             displayElement.appendChild(finalImg);
-
-            // Fade the final image in
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    finalImg.style.opacity = '1';
-                    finalImg.style.transform = 'scale(1)'; 
-                });
-            });
-
-
-        }, 400); // matches the fade-out duration
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                finalImg.style.opacity = '1';
+                finalImg.style.transform = 'scale(1)';
+            }));
+        }, 400);
     }
 
     function startAnimation() {
@@ -307,6 +260,25 @@
         init();
     }
 })();
+</script>
+
+<script>
+    // Grain texture — replaces the CSS SVG method
+    const canvas = document.createElement('canvas');
+    canvas.width = 300;
+    canvas.height = 300;
+    canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9997;opacity:0.4;';
+    const ctx = canvas.getContext('2d');
+    const imageData = ctx.createImageData(300, 300);
+    for (let i = 0; i < imageData.data.length; i += 4) {
+        const val = Math.random() * 255;
+        imageData.data[i] = val;
+        imageData.data[i+1] = val;
+        imageData.data[i+2] = val;
+        imageData.data[i+3] = 18; // very low opacity per pixel
+    }
+    ctx.putImageData(imageData, 0, 0);
+    document.body.appendChild(canvas);
 </script>
 
 </body>
