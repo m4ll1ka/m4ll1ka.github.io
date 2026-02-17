@@ -28,12 +28,9 @@
 
         <div class="header-row">
                 <div class="header-col1">
-                    <div class="text-wrapper">
-                        <h1 class="header-text">Hi! My name is <br><span>Mallika</span></h1>
-                    </div>
-                </div>
-                <div class="header-col2">
-                    <img src="https://m4ll1ka.github.io/docs/assets/images/pic.png" class= "header-image">
+                    <h1 class="header-text">Hi! My name is <br>
+    <span id="nameDisplay" style="display: inline-flex; gap: 12px; align-items: center;"></span>
+</h1>
                 </div>
         </div>
 
@@ -159,6 +156,181 @@
         .catch(error => console.error('Error!', error.message))
     })
   </script>
+<div id="mallikaAnimation" style="width: 100%; padding: 40px 0; text-align: center;">
+    <div id="nameDisplay" style="display: inline-flex; gap: 12px; align-items: center; justify-content: center;"></div>
+
+</div>
+
+<script>
+(function() {
+    const SCRAMBLE_SPEED = 200;      // Ms between image changes
+    const REVEAL_START_DELAY = 2000; // When first syllable locks in ms
+    const REVEAL_SYLLABLE_GAP = 700; // Time between each syllable locking in ms
+    const IMAGE_HEIGHT = 80;        
+    const BASE_IMAGE_PATH = 'https://m4ll1ka.github.io/docs/assets/images/animation';
+
+    // Images for each syllable
+    const syllableImageVariants = [
+         // Syllable 0: "ma"
+        [
+            'cursive_ma.png', // Ma (English cursive)
+            'hindi_ma.png', // म (Hindi/Devanagari)
+            'malayalam_ma.png', // മ (Malayalam)
+            'kannada_ma.png', // ಮ (Kannada)
+            'eng_ma.png', // Ma (English handwritten) 
+        ],
+
+        // Syllable 1: "lli"
+        [
+            'cursive_li.png', // lli (English cursive)
+            'hindi_li.png', // ल्लि (Hindi/Devanagari)
+            'malayalam_li.png', // ല്ലി (Malayalam)
+            'kannada_li.png', // ಲ್ಲಿ (Kannada)
+            'eng_li.png', // lli (English handwritten)
+        ],
+
+        // Syllable 2: "ka"
+        [
+            // Position 2: ka
+            'cursive_ka.png', // ka (English cursive)
+            'hindi_ka.png', // क (Hindi/Devanagari)
+            'malayalam_ka.png', // ക (Malayalam)
+            'kannada_ka.png', // ಕ (Kannada)
+            'eng_ka.png', // ka (English handwritten) 
+        ],
+    ];
+
+    // Which variant to show when each syllable locks in (before the final name appears)
+    const FINAL_VARIANT_INDEX = 0;
+
+    // final full name image that replaces everything at the very end
+    const FINAL_NAME_IMAGE = 'final_text.png'; 
+
+    let revealedIndices = new Set();
+    let imageElements = [];
+    let scrambleInterval = null;
+    const SYLLABLE_COUNT = syllableImageVariants.length;
+
+    function init() {
+        const displayElement = document.getElementById('nameDisplay');
+        if (!displayElement || displayElement.hasChildNodes()) return;
+
+        syllableImageVariants.forEach((variants, index) => {
+            const img = document.createElement('img');
+            img.style.cssText = `
+                height: ${IMAGE_HEIGHT}px;
+                width: auto;
+                transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
+                opacity: 0.8;
+            `;
+            //filter: brightness(0.8) saturate(0.7);
+            img.src = BASE_IMAGE_PATH + variants[0];
+            img.alt = 'syllable-' + index;
+
+            // Red tint if image fails to load — helps catch filename typos
+            img.onerror = function() {
+                this.style.cssText += 'background: rgba(255,0,0,0.3); border-radius: 4px; min-width: 40px;';
+                this.alt = 'missing: ' + variants[0];
+                console.error('Image not found:', BASE_IMAGE_PATH + variants[0]);
+            };
+
+            displayElement.appendChild(img);
+            imageElements.push(img);
+        });
+
+        startAnimation();
+    }
+
+    function getRandomVariantImage(index) {
+        const variants = syllableImageVariants[index];
+        return BASE_IMAGE_PATH + variants[Math.floor(Math.random() * variants.length)];
+    }
+
+    function updateScramble() {
+        imageElements.forEach((img, index) => {
+            if (!revealedIndices.has(index)) {
+                img.src = getRandomVariantImage(index);
+            }
+        });
+    }
+
+    function revealSyllable(index) {
+        revealedIndices.add(index);
+        const img = imageElements[index];
+        img.src = BASE_IMAGE_PATH + syllableImageVariants[index][FINAL_VARIANT_INDEX];
+        img.style.cssText = `
+            height: ${IMAGE_HEIGHT}px;
+            width: auto;
+            transition: opacity 0.2s ease, filter 0.2s ease, transform 0.2s ease;
+            filter: brightness(1) saturate(1) drop-shadow(0 0 10px rgba(52, 196, 235, 0.5));
+            opacity: 1;
+            transform: scale(1.05);
+        `;
+        // purple: (147, 51, 234, 0.5)
+        // Once all syllables are revealed, swap to the full cursive name
+        if (revealedIndices.size === SYLLABLE_COUNT) {
+            clearInterval(scrambleInterval);
+            setTimeout(showFinalName, 600); // short pause before the swap -- 2
+        }
+    }
+
+    function showFinalName() {
+        const displayElement = document.getElementById('nameDisplay');
+
+        // Fade all syllable images out
+        imageElements.forEach(img => {
+            img.style.opacity = '0';
+            img.style.transform = 'scale(0.95)';
+        });
+
+        // After fade out, replace with the full name image
+        setTimeout(() => {
+            displayElement.innerHTML = '';
+
+            const finalImg = document.createElement('img');
+            finalImg.src = BASE_IMAGE_PATH + FINAL_NAME_IMAGE;
+            finalImg.alt = 'Mallika';
+            finalImg.style.cssText = `
+                height: ${IMAGE_HEIGHT}px;
+                width: auto;
+                opacity: 0;
+                transition: opacity 0.2s ease, transform 0.2s ease;
+                transform: scale(0.95);
+                filter: drop-shadow(0 0 12px rgba(52, 196, 235, 0.5));
+            `;
+            finalImg.onerror = function() {
+                this.style.cssText += 'background: rgba(255,0,0,0.3); border-radius: 4px; min-width: 100px;';
+                console.error('Final image not found:', BASE_IMAGE_PATH + FINAL_NAME_IMAGE);
+            };
+            displayElement.appendChild(finalImg);
+
+            // Fade the final image in
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    finalImg.style.opacity = '1';
+                    finalImg.style.transform = 'scale(1)'; 
+                });
+            });
+
+
+        }, 400); // matches the fade-out duration
+    }
+
+    function startAnimation() {
+        scrambleInterval = setInterval(updateScramble, SCRAMBLE_SPEED);
+        syllableImageVariants.forEach((_, index) => {
+            const delay = REVEAL_START_DELAY + (index * REVEAL_SYLLABLE_GAP);
+            setTimeout(() => revealSyllable(index), delay);
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
 
 </body>
 </html>
