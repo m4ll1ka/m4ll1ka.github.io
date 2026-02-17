@@ -19,9 +19,10 @@ html{
     scroll-behavior: smooth;
 }
 body{
+    /*
     background: linear-gradient(135deg, #feeed5, #fdbfca);
     color: #333;
-    /*
+    
     #f6f6d9, #47e4e0, #5f81e4);
 
     background: linear-gradient(to bottom, #fce7f3, #fbcfe8,#fdbadf, #d8a4bf);
@@ -414,3 +415,4 @@ nav .fas{
     margin-top: -40px;
     display: block;
 }
+
