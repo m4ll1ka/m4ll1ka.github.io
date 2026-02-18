@@ -3,43 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>what's in my bag ✨</title>
+  <title>what's in my bag</title>
 
-  <!-- GSAP + ScrollTrigger + Draggable -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
 
   <style>
-    /* ── Reset & Base ──────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream:   #fdf6ec;
-      --blush:   #f5c6b0;
-      --rose:    #e8836a;
-      --brown:   #5c3d2e;
-      --sage:    #a8c5a0;
-      --lavender:#c9b8d8;
-      --font-display: 'DM Serif Display', serif;
-      --font-hand:    'Caveat', cursive;
+      --cream:    #fdf6ec;
+      --blush:    #f5c6b0;
+      --rose:     #e8836a;
+      --brown:    #5c3d2e;
+      --lavender: #c9b8d8;
     }
-
-    html { scroll-behavior: smooth; }
 
     body {
       background: var(--cream);
       color: var(--brown);
-      font-family: var(--font-hand);
+      font-family: 'DM Sans';
       overflow-x: hidden;
-      cursor: default;
     }
 
-    /* ── Hero section (scroll trigger starts here) ──── */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob-1 { width: 500px; height: 500px; background: var(--blush);    top: -100px; right: -100px; }
+    .blob-2 { width: 400px; height: 400px; background: var(--lavender); bottom: -80px; left: -80px; }
+
+    /* ── HERO ── */
     #hero {
       height: 100vh;
       display: flex;
@@ -48,154 +48,158 @@
       justify-content: center;
       gap: 1rem;
       position: relative;
+      z-index: 1;
     }
-
     #hero h1 {
-      font-family: var(--font-display);
-      font-style: italic;
+      font-family: 'DM Serif Display', serif;
+      font-style: bold;
       font-size: clamp(2.5rem, 7vw, 5.5rem);
-      color: var(--brown);
       text-align: center;
       line-height: 1.1;
     }
+    #hero p { font-size: 2.5rem; color: var(--rose); }
 
-    #hero p {
-      font-size: 1.4rem;
-      color: var(--rose);
-      letter-spacing: 0.04em;
-    }
+    /*
+      HOW THE SCROLL SECTION WORKS:
+      ─────────────────────────────
+      #scroll-section is a tall div (height set by JS).
+      Inside it, #stage is position:sticky — it pins itself
+      to the top of the viewport and stays there while the
+      user scrolls through the section's full height.
 
-    .scroll-hint {
-      position: absolute;
-      bottom: 2rem;
-      font-size: 1.1rem;
-      color: var(--rose);
-      animation: bounce 2s ease-in-out infinite;
-    }
+      Items live inside #stage as position:absolute elements.
+      Because they're children of a sticky element (not fixed),
+      they automatically disappear when the sticky element
+      un-sticks (i.e. when the user scrolls past the section).
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(8px); }
-    }
-
-    /* ── Sticky scene container ─────────────────────── */
-    #scene-wrapper {
-      height: 400vh; /* controls scroll duration */
+      Below the sticky #stage, we stack invisible .sentinel divs.
+      As each sentinel scrolls into view, its matching item
+      pops out from the bag. Simple, reliable, no tricks.
+    */
+    #scroll-section {
       position: relative;
     }
 
-    #scene {
+    #stage {
       position: sticky;
       top: 0;
       width: 100%;
       height: 100vh;
       overflow: hidden;
+      z-index: 2;
     }
 
-    /* ── Bag ────────────────────────────────────────── */
-    #bag-container {
+    #bag-wrap {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: clamp(220px, 30vw, 360px);
-      z-index: 10;
+      width: clamp(180px, 24vw, 300px);
       pointer-events: none;
+      z-index: 2;
     }
-
-    #bag-container img {
+    #bag-wrap img { width: 100%; display: block; }
+    #bag-placeholder {
       width: 100%;
-      filter: drop-shadow(4px 8px 16px rgba(92,61,46,0.25));
+      height: clamp(200px, 28vw, 340px);
+      background: #e8836a22;
+      border: 3px dashed var(--rose);
+      border-radius: 20px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      color: var(--rose);
+      font-size: 1rem;
+      text-align: center;
+      padding: 1rem;
     }
 
-    /* ── Items ──────────────────────────────────────── */
+    /* Items are absolute inside #stage */
     .bag-item {
       position: absolute;
-      width: clamp(60px, 8vw, 110px);
       cursor: grab;
       user-select: none;
-      z-index: 20;
-      opacity: 0; /* revealed by GSAP */
-      transition: filter 0.2s;
+      z-index: 10;
+      opacity: 0;
     }
-
     .bag-item:active { cursor: grabbing; }
-    .bag-item:hover  { filter: drop-shadow(0 6px 14px rgba(92,61,46,0.3)) brightness(1.05); z-index: 100; }
+    .bag-item:hover  { z-index: 9999 !important; filter: brightness(1.05); }
+    .bag-item img    { width: 100%; display: block; pointer-events: none; }
 
-    .bag-item img {
-      width: 100%;
-      height: auto;
-      pointer-events: none;
-      display: block;
-    }
-
-    /* label tooltip */
-    .bag-item::after {
-      content: attr(data-label);
+    .item-tooltip {
       position: absolute;
-      bottom: -1.6rem;
+      bottom: calc(100% + 8px);
       left: 50%;
       transform: translateX(-50%);
       background: var(--brown);
       color: var(--cream);
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      white-space: nowrap;
+      padding: 7px 11px;
+      border-radius: 12px;
+      font-size: 1rem;
+      line-height: 1.4;
+      max-width: 200px;
+      white-space: normal;
+      text-align: center;
       opacity: 0;
-      transition: opacity 0.2s;
       pointer-events: none;
+      transition: opacity 0.2s;
+      z-index: 99999;
+      width: max-content;
+    }
+    .item-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: var(--brown);
+    }
+    .bag-item:hover .item-tooltip { opacity: 1; }
+
+    .img-placeholder {
+      width: 80px; height: 80px;
+      background: var(--blush);
+      border: 2px dashed var(--rose);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--rose);
+      text-align: center;
+      padding: 4px;
     }
 
-    .bag-item:hover::after { opacity: 1; }
+    /* Sentinels sit below the sticky stage inside scroll-section */
+    #sentinels {
+      position: absolute;
+      top: 100vh;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+    }
+    .sentinel { height: 15vh; width: 100%; }
 
-    /* ── Footer / caption area ───────────────────────── */
+    /* ── OUTRO ── */
     #outro {
       min-height: 60vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0.8rem;
+      gap: 1rem;
       padding: 4rem 2rem;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
-
     #outro h2 {
-      font-family: var(--font-display);
-      font-style: italic;
+      font-family: 'DM Serif Display', serif;
+      font-style: bold;
       font-size: clamp(2rem, 5vw, 3.5rem);
     }
+    #outro p { font-size: 2rem; max-width: 560px; color: var(--rose); line-height: 1.6; }
 
-    #outro p {
-      font-size: 1.2rem;
-      max-width: 480px;
-      color: var(--rose);
-    }
-
-    /* ── Decorative blobs ────────────────────────────── */
-    .blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.35;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .blob-1 {
-      width: 500px; height: 500px;
-      background: var(--blush);
-      top: -100px; right: -100px;
-    }
-
-    .blob-2 {
-      width: 400px; height: 400px;
-      background: var(--lavender);
-      bottom: -80px; left: -80px;
-    }
-
-    /* ── Reset button ────────────────────────────────── */
     #reset-btn {
       position: fixed;
       bottom: 1.5rem;
@@ -205,207 +209,192 @@
       border: none;
       border-radius: 2rem;
       padding: 0.6rem 1.4rem;
-      font-family: var(--font-hand);
+      font-family: 'DM Sans';
       font-size: 1rem;
       cursor: pointer;
+      z-index: 9999;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s, transform 0.15s;
-      z-index: 999;
+      transition: opacity 0.3s;
     }
-
-    #reset-btn.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    #reset-btn:hover { transform: scale(1.05); }
+    #reset-btn.visible { opacity: 1; pointer-events: auto; }
+    #reset-btn:hover { opacity: 0.8; }
   </style>
 </head>
 <body>
 
-  <!-- decorative blobs -->
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
 
-  <!-- ── HERO ── -->
   <section id="hero">
-    <h1>what's in<br/>my bag?</h1>
+    <h1>what's in<br/>my trinket bag?</h1>
     <p>scroll to find out ↓</p>
-    <span class="scroll-hint">↓</span>
   </section>
 
-  <!-- ── STICKY SCENE ── -->
-  <div id="scene-wrapper">
-    <div id="scene">
-
-      <!-- BAG IMAGE — replace src with your bag PNG -->
-      <div id="bag-container">
+  <div id="scroll-section">
+    <div id="stage">
+      <div id="bag-wrap">
         <img src="https://m4ll1ka.github.io/docs/assets/images/bag-proj/bag.png" alt="my bag"
-             onerror="this.src='';this.parentElement.innerHTML='<div style=\'width:280px;height:320px;background:#e8836a33;border:3px dashed #e8836a;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#e8836a;text-align:center;padding:1rem;\'>👜<br/>drop your<br/>bag.png here</div>'" />
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
+        <div id="bag-placeholder">bag.png goes here</div>
       </div>
+    </div>
+    <div id="sentinels"></div>
+  </div>
 
-      <div class="bag-item" data-label="bracelet"    data-x="-320" data-y="180"  data-rot="-15" style="width:70px">
-        <img src="https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-1.png" alt="bracelet"
-             onerror="this.src='';this.parentElement.style.cssText+=';background:#f5c6b0;border-radius:12px;width:70px;height:70px;display:flex;align-items:center;justify-content:center;font-size:2rem;'; this.parentElement.innerHTML+='💄'; this.remove();" />
-      </div>
-
-      <div class="bag-item" data-label="frog"      data-x="280"  data-y="200"  data-rot="12"  style="width:100px">
-        <img src="https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-2.png" alt="frog"
-             onerror="this.src='';this.parentElement.style.cssText+=';background:#c9b8d8;border-radius:12px;width:100px;height:70px;display:flex;align-items:center;justify-content:center;font-size:2rem;'; this.parentElement.innerHTML+='👛'; this.remove();" />
-      </div>
-
-      <div class="bag-item" data-label="duck"       data-x="-200" data-y="-160" data-rot="5"   style="width:80px">
-        <img src="https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-3.png" alt="duck"
-             onerror="this.src='';this.parentElement.style.cssText+=';background:#a8c5a0;border-radius:12px;width:80px;height:80px;display:flex;align-items:center;justify-content:center;font-size:2rem;'; this.parentElement.innerHTML+='📱'; this.remove();" />
-      </div>
-
-      <div class="bag-item" data-label="marble"        data-x="200"  data-y="-180" data-rot="-20" style="width:75px">
-        <img src="https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-4.png" alt="marble"
-             onerror="this.src='';this.parentElement.style.cssText+=';background:#fdf6ec;border:2px solid #e8836a;border-radius:12px;width:75px;height:75px;display:flex;align-items:center;justify-content:center;font-size:2rem;'; this.parentElement.innerHTML+='🔑'; this.remove();" />
-      </div>
-
-      <div class="bag-item" data-label="baby1"  data-x="-380" data-y="-80"  data-rot="8"   style="width:110px">
-        <img src="https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-5.png" alt="baby1
-             onerror="this.src='';this.parentElement.style.cssText+=';background:#e8836a33;border-radius:12px;width:110px;height:60px;display:flex;align-items:center;justify-content:center;font-size:2rem;'; this.parentElement.innerHTML+='🕶️'; this.remove();" />
-      </div>
-
-      <div class="bag-item" data-label="baby2"    data-x="360"  data-y="-60"  data-rot="-10" style="width:90px">
-        <img src="https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-6.png" alt="baby2"
-             onerror="this.src='';this.parentElement.style.cssText+=';background:#f5c6b0;border-radius:8px;width:90px;height:110px;display:flex;align-items:center;justify-content:center;font-size:2rem;'; this.parentElement.innerHTML+='📓'; this.remove();" />
-      </div>
-
-      <div class="bag-item" data-label="lego"  data-x="-120" data-y="260"  data-rot="25"  style="width:95px">
-        <img src="https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-7.png" alt="lego"
-             onerror="this.src='';this.parentElement.style.cssText+=';background:#c9b8d8;border-radius:50%;width:95px;height:95px;display:flex;align-items:center;justify-content:center;font-size:2rem;'; this.parentElement.innerHTML+='🎧'; this.remove();" />
-      </div>
-
-      <div class="bag-item" data-label="crystal-green"  data-x="130"  data-y="270"  data-rot="-8"  style="width:65px">
-        <img src="https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-8.png" alt="crystal-green"
-             onerror="this.src='';this.parentElement.style.cssText+=';background:#a8c5a0;border-radius:12px;width:65px;height:100px;display:flex;align-items:center;justify-content:center;font-size:2rem;'; this.parentElement.innerHTML+='🧴'; this.remove();" />
-      </div>
-
-      <div class="bag-item" data-label="crystal-pink" data-x="-300" data-y="-220" data-rot="-5" style="width:70px">
-        <img src="https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-9.png" alt="crystal-pink"
-             onerror="this.src='';this.parentElement.style.cssText+=';background:#fdf6ec;border:2px solid #5c3d2e;border-radius:12px;width:70px;height:120px;display:flex;align-items:center;justify-content:center;font-size:2rem;'; this.parentElement.innerHTML+='💧'; this.remove();" />
-      </div>
-
-      <div class="bag-item" data-label="crystal-blue"     data-x="310"  data-y="130"  data-rot="18"  style="width:80px">
-        <img src="https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-10.png" alt="crystal-blue"
-             onerror="this.src='';this.parentElement.style.cssText+=';background:#f5c6b0;border-radius:12px;width:80px;height:80px;display:flex;align-items:center;justify-content:center;font-size:2rem;'; this.parentElement.innerHTML+='🔌'; this.remove();" />
-      </div>
-
-      <div class="bag-item" data-label="bottle-tab"     data-x="310"  data-y="130"  data-rot="18"  style="width:80px">
-        <img src="https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-11.png" alt="bottle-tab"
-             onerror="this.src='';this.parentElement.style.cssText+=';background:#f5c6b0;border-radius:12px;width:80px;height:80px;display:flex;align-items:center;justify-content:center;font-size:2rem;'; this.parentElement.innerHTML+='🔌'; this.remove();" />
-      </div>
-
-      <div class="bag-item" data-label="fossil-type-thing"     data-x="310"  data-y="130"  data-rot="18"  style="width:80px">
-        <img src="https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-12.png" alt="fossil-type-thing"
-             onerror="this.src='';this.parentElement.style.cssText+=';background:#f5c6b0;border-radius:12px;width:80px;height:80px;display:flex;align-items:center;justify-content:center;font-size:2rem;'; this.parentElement.innerHTML+='🔌'; this.remove();" />
-      </div>
-
-      <div class="bag-item" data-label="fortune"     data-x="310"  data-y="130"  data-rot="18"  style="width:80px">
-        <img src="https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-13.png" alt="fortune"
-             onerror="this.src='';this.parentElement.style.cssText+=';background:#f5c6b0;border-radius:12px;width:80px;height:80px;display:flex;align-items:center;justify-content:center;font-size:2rem;'; this.parentElement.innerHTML+='🔌'; this.remove();" />
-      </div>
-
-    </div><!-- /scene -->
-  </div><!-- /scene-wrapper -->
-
-  <!-- ── OUTRO ── -->
   <section id="outro">
-    <h2>that's everything ✨</h2>
-    <p>drag things around, make a little mess — it's your bag after all.</p>
+    <h2>that's everything :3</h2>
+    <p>hope you enjoyed my trinkets! ps: shoutout jharna suresh for giving me the pink pouch as a 13th birthday party return gift. love u shawty suresh.</p>
   </section>
 
   <button id="reset-btn">↩ reset positions</button>
 
+
   <script>
     gsap.registerPlugin(ScrollTrigger, Draggable);
 
-    const items = gsap.utils.toArray('.bag-item');
-    const cx = window.innerWidth  / 2;
-    const cy = window.innerHeight / 2;
+    const ITEMS = [
+      { src:'https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-1.png',  alt:'bracelet',        label:'a bracelet my dear friends archie and jharna made for me in highschool', w:300, dx:-400, dy:180,  rot:-15 },
+      { src:'https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-2.png',  alt:'frog keychain',   label:'a frog keychain my friend ash gave me for my 19th birthday',              w:100, dx:280,  dy:200,  rot:12  },
+      { src:'https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-3.png',  alt:'duck',            label:'mini rubber duck i was supposed to turn into earrings',                   w:80,  dx:-100, dy:-160, rot:5   },
+      { src:'https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-4.png',  alt:'marble',          label:'random marble from my highschool ceramics class??',                        w:75,  dx:200,  dy:-180, rot:-20 },
+      { src:'https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-5.png',  alt:'og mini baby',    label:"mini baby archie's roommate madeline gave me freshman year at UIUC",       w:110, dx:-397, dy:-80,  rot:8   },
+      { src:'https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-6.png',  alt:'ramona mini baby',label:'mini baby that i tried to turn into ramona flowers (flop)',                w:90,  dx:422,  dy:-200,  rot:-10 },
+      { src:'https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-7.png',  alt:'lego',            label:'jay from lego ninjago (stole this from my brother)',                       w:95,  dx:-120, dy:260,  rot:25  },
+      { src:'https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-8.png',  alt:'crystal g',       label:'green fluorite',                                                           w:65,  dx:130,  dy:270,  rot:-8  },
+      { src:'https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-9.png',  alt:'crystal p',       label:'rose quartz',                                                              w:70,  dx:-250, dy:-220, rot:-5  },
+      { src:'https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-10.png', alt:'crystal b',       label:'tiny crystal — unsure what type',                                          w:80,  dx:500,  dy:20,  rot:18  },
+      { src:'https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-11.png', alt:'bottletab',       label:'bottletab from my first drink (mango whiteclaw)',                          w:80,  dx:300,  dy:69,  rot:-12 },
+      { src:'https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-12.png', alt:'fossil',          label:"fossil type thing — don't know what this is LOL",                          w:80,  dx:-400, dy:-270, rot:8   },
+      { src:'https://m4ll1ka.github.io/docs/assets/images/bag-proj/item-13.png', alt:'fortune',         label:'panda express fortune from many moons ago :0',                             w:300, dx:550,  dy:200,   rot:6   },
+    ];
 
-    // position every item in the center (hidden inside the bag) to start
-    items.forEach(el => {
+    const stage       = document.getElementById('stage');
+    const sentinelEl  = document.getElementById('sentinels');
+    const resetBtn    = document.getElementById('reset-btn');
+    const scrollSect  = document.getElementById('scroll-section');
+
+    // stage centre (it's always 100vw × 100vh while sticky)
+    const cx = () => stage.offsetWidth  / 2;
+    const cy = () => stage.offsetHeight / 2;
+
+    const els      = [];
+    const revealed = [];
+
+    ITEMS.forEach((data, i) => {
+
+      /* ── build element ── */
+      const el = document.createElement('div');
+      el.className  = 'bag-item';
+      el.style.width = data.w + 'px';
+
+      const tooltip = document.createElement('div');
+      tooltip.className   = 'item-tooltip';
+      tooltip.textContent = data.label;
+
+      const img = document.createElement('img');
+      img.alt = data.alt;
+      img.src = data.src;
+      img.onerror = () => {
+        img.remove();
+        const ph = document.createElement('div');
+        ph.className   = 'img-placeholder';
+        ph.textContent = data.alt;
+        el.appendChild(ph);
+      };
+
+      el.appendChild(tooltip);
+      el.appendChild(img);
+      stage.appendChild(el);
+      els.push(el);
+      revealed.push(false);
+
+      // place at stage centre, invisible, tiny
       gsap.set(el, {
-        left: cx - el.offsetWidth  / 2,
-        top:  cy - el.offsetHeight / 2,
-        opacity: 0,
-        scale: 0.6,
-        rotation: 0,
-        zIndex: 20,
+        left: cx(), top: cy(),
+        xPercent: -50, yPercent: -50,
+        x: 0, y: 0,
+        scale: 0.15, opacity: 0, rotation: 0,
+      });
+
+      /* ── build sentinel ── */
+      const s = document.createElement('div');
+      s.className = 'sentinel';
+      sentinelEl.appendChild(s);
+    });
+
+    // Give scroll-section enough height for all sentinels + a pause at the end
+    scrollSect.style.height = `${100 + ITEMS.length * 15 + 80}vh`;
+
+    /* ── ScrollTrigger: reveal each item when its sentinel enters view,
+          retract it back into the bag when scrolling back up past it ── */
+    document.querySelectorAll('.sentinel').forEach((sentinel, i) => {
+      ScrollTrigger.create({
+        trigger: sentinel,
+        start:   'top 70%',
+
+        onEnter() {
+          revealed[i] = true;
+          resetBtn.classList.add('visible');
+
+          gsap.to(els[i], {
+            x: ITEMS[i].dx,
+            y: ITEMS[i].dy,
+            rotation: ITEMS[i].rot,
+            opacity: 1,
+            scale: 1,
+            duration: 0.65,
+            ease: 'back.out(1.5)',
+          });
+        },
+
+        onLeaveBack() {
+          revealed[i] = false;
+
+          // animate back to bag centre, shrink and fade out
+          gsap.to(els[i], {
+            x: 0,
+            y: 0,
+            rotation: 0,
+            opacity: 0,
+            scale: 0.15,
+            duration: 0.45,
+            ease: 'back.in(1.5)',
+          });
+
+          // hide reset button if no items are out
+          if (!revealed.some(Boolean)) resetBtn.classList.remove('visible');
+        },
       });
     });
 
-    // ── Staggered dump animation on scroll ──────────────
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#scene-wrapper',
-        start: 'top top',
-        end:   'bottom bottom',
-        scrub: 1.5,
-      }
-    });
-
-    items.forEach((el, i) => {
-      const tx = cx + parseFloat(el.dataset.x) - el.offsetWidth  / 2;
-      const ty = cy + parseFloat(el.dataset.y) - el.offsetHeight / 2;
-      const rot = parseFloat(el.dataset.rot) || 0;
-
-      tl.to(el, {
-        left:     tx,
-        top:      ty,
-        opacity:  1,
-        scale:    1,
-        rotation: rot,
-        ease:     'back.out(1.4)',
-        duration: 0.6,
-      }, i * 0.08); // slight stagger
-    });
-
-    // ── Make items draggable after they appear ───────────
-    Draggable.create(items, {
+    /* ── Draggable ──
+       absolute-positioned children of a sticky parent + type:'x,y'
+       is the only combo that works reliably without items vanishing. */
+    Draggable.create(els, {
       type: 'x,y',
-      edgeResistance: 0.65,
-      bounds: window,
-      onPress() { gsap.to(this.target, { scale: 1.1, duration: 0.15 }); },
-      onRelease() {
-        gsap.to(this.target, {
-          scale:    1,
-          rotation: gsap.utils.random(-20, 20),
-          duration: 0.3,
-          ease: 'elastic.out(1, 0.5)',
-        });
-      },
+      onPress()   { gsap.to(this.target, { scale: 1.12, duration: 0.12 }); },
+      onRelease() { gsap.to(this.target, { scale: 1,    duration: 0.2  }); },
     });
 
-    // ── Show reset button once dumped ───────────────────
-    ScrollTrigger.create({
-      trigger: '#scene-wrapper',
-      start:   'top+=30% top',
-      onEnter: () => document.getElementById('reset-btn').classList.add('visible'),
-      onLeaveBack: () => document.getElementById('reset-btn').classList.remove('visible'),
-    });
-
-    // ── Reset positions ──────────────────────────────────
-    document.getElementById('reset-btn').addEventListener('click', () => {
-      items.forEach(el => {
-        const tx = cx + parseFloat(el.dataset.x) - el.offsetWidth  / 2;
-        const ty = cy + parseFloat(el.dataset.y) - el.offsetHeight / 2;
+    /* ── Reset button ── */
+    resetBtn.addEventListener('click', () => {
+      els.forEach((el, i) => {
+        if (!revealed[i]) return;
         gsap.to(el, {
-          x:        0,
-          y:        0,
-          left:     tx,
-          top:      ty,
-          rotation: parseFloat(el.dataset.rot) || 0,
-          scale:    1,
-          duration: 0.8,
-          ease:     'power3.out',
+          x: ITEMS[i].dx, y: ITEMS[i].dy,
+          rotation: ITEMS[i].rot,
+          scale: 1,
+          duration: 0.65,
+          ease: 'back.out(1.5)',
         });
       });
+    });
+
+    /* ── Resize: re-anchor left/top to new stage centre ── */
+    window.addEventListener('resize', () => {
+      els.forEach(el => gsap.set(el, { left: cx(), top: cy() }));
+      ScrollTrigger.refresh();
     });
   </script>
 
