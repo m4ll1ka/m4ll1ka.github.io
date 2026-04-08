@@ -5,29 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mallika Pallipuram</title>
-    <link rel="stylesheet" href="https://m4ll1ka.github.io/docs/assets/css/style.css">
     <link rel="stylesheet" href="https://use.typekit.net/xeq6kow.css">
     <link rel="icon" type="image/png" href="https://m4ll1ka.github.io/docs/assets/images/melogopng.png">
+    <link rel="stylesheet" href="style.css">
+    <!--<link rel="stylesheet" href="https://m4ll1ka.github.io/docs/assets/css/style.css">-->
 </head>
 <script src="https://kit.fontawesome.com/93b555f9c1.js" crossorigin="anonymous"></script>
 <body>
 
-<!-- Custom cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
 <!---------header--------->
 <div id="header">
     <div class="header-rule-top"></div>
-    <span class="header-issue">Portfolio 2026 — HCI Designer & Creative Technologist</span>
-
     <div class="container-h">
         <nav>
-            <img src="https://m4ll1ka.github.io/docs/assets/images/melogopng.png" class="logo">
+            <a href="https://m4ll1ka.github.io"><img src="https://m4ll1ka.github.io/docs/assets/images/melogopng.png" class="logo"></a>
             <ul id="sidemenu">
                 <i class="fas fa-times" onclick="closemenu()"></i>
                 <li><a href="#header">About</a></li>
-                <li><a href="https://readymag.website/u497443308/6099553/work/">Work</a></li>
+                <li><a href="work.html">Work</a></li>
                 <li><a href="play.html">Play</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -45,17 +40,17 @@
         </div>
     </div>
 </div>
+<!---------work--------->
 
 <!---------about--------->
 <div id="about">
-    <p class="section-label">About</p>
     <div class="about-row">
         <div class="about-text">
             <p>
-                I am a designer and aspiring creative technologist that loves
+                I am a designer and creative technologist that loves
                 <span class="highlight">building cool stuff.</span>
                 I explore the complexities of human behavior and build
-                <em>digital experiences</em> that center people's needs, values,
+                digital experiences that center people's needs, values,
                 and the broader impact design has on their lives.
             </p>
         </div>
@@ -68,10 +63,9 @@
 <!---------contact--------->
 <div id="contact">
     <div class="container">
-        <p class="section-label">Contact</p>
+        <h1 class="sub-title">Let's talk.</h1>
         <div class="row">
             <div class="contact-left">
-                <h1 class="sub-title">Let's talk.</h1>
                 <div class="contact-list">
                     <ul>
                         <li><a href="https://www.linkedin.com/in/mallika-pallipuram-b628011b0/">LinkedIn</a></li>
@@ -80,16 +74,7 @@
                         <li><a href="mailto:mallikapallipuram@gmail.com">mallikapallipuram@gmail.com</a></li>
                     </ul>
                 </div>
-                <a href="https://m4ll1ka.github.io/docs/assets/images/Mallika Pallipuram Resume FA25.pdf" target="_blank" class="btn">Resume ↗</a>
-            </div>
-            <div class="contact-right">
-                <form name="submit-to-google-sheet" id="myForm">
-                    <input type="text" name="Name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <textarea name="Message" rows="5" placeholder="Your Message"></textarea>
-                    <button type="submit" class="btn">Send it →</button>
-                </form>
-                <span id="msg"></span>
+                <a href="https://m4ll1ka.github.io/docs/assets/images/Mallika Pallipuram Resume FA25.pdf" target="_blank" class="btn">Resume</a>
             </div>
         </div>
     </div>
@@ -99,68 +84,6 @@
 </div>
 
 <!---------scripts--------->
-<script>
-    // Custom cursor
-    const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursorRing');
-    let ringX = 0, ringY = 0, curX = 0, curY = 0;
-
-    document.addEventListener('mousemove', e => {
-        curX = e.clientX; curY = e.clientY;
-        cursor.style.left = curX + 'px';
-        cursor.style.top = curY + 'px';
-    });
-
-    // Ring follows with lag
-    function animateRing() {
-        ringX += (curX - ringX) * 0.12;
-        ringY += (curY - ringY) * 0.12;
-        ring.style.left = ringX + 'px';
-        ring.style.top = ringY + 'px';
-        requestAnimationFrame(animateRing);
-    }
-    animateRing();
-
-    // Cursor grows on hover
-    document.querySelectorAll('a, button, .btn, .logo').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursor.style.width = '20px';
-            cursor.style.height = '20px';
-            ring.style.width = '50px';
-            ring.style.height = '50px';
-        });
-        el.addEventListener('mouseleave', () => {
-            cursor.style.width = '10px';
-            cursor.style.height = '10px';
-            ring.style.width = '32px';
-            ring.style.height = '32px';
-        });
-    });
-</script>
-
-<script>
-    var sidemenu = document.getElementById("sidemenu");
-    function openmenu() { sidemenu.style.right = "0"; }
-    function closemenu() { sidemenu.style.right = "-240px"; }
-</script>
-
-<script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxLaYNiNb3_moe9s_2qpG7lRQxh3sViA35e0ohM5eBGvgFAuNHh7DrnF6fct9oM2c5s/exec'
-    const form = document.forms['submit-to-google-sheet']
-    const msg = document.getElementById("msg")
-
-    form.addEventListener('submit', e => {
-        e.preventDefault()
-        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-            .then(() => {
-                msg.innerHTML = "Message sent successfully!"
-                setTimeout(() => { msg.innerHTML = "" }, 5000)
-                form.reset()
-            })
-            .catch(error => console.error('Error!', error.message))
-    })
-</script>
-
 <!---------name animation--------->
 <script>
 (function() {
@@ -261,25 +184,7 @@
     }
 })();
 </script>
-
-<script>
-    // Grain texture — replaces the CSS SVG method
-    const canvas = document.createElement('canvas');
-    canvas.width = 300;
-    canvas.height = 300;
-    canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9997;opacity:0.4;';
-    const ctx = canvas.getContext('2d');
-    const imageData = ctx.createImageData(300, 300);
-    for (let i = 0; i < imageData.data.length; i += 4) {
-        const val = Math.random() * 255;
-        imageData.data[i] = val;
-        imageData.data[i+1] = val;
-        imageData.data[i+2] = val;
-        imageData.data[i+3] = 18; // very low opacity per pixel
-    }
-    ctx.putImageData(imageData, 0, 0);
-    document.body.appendChild(canvas);
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
