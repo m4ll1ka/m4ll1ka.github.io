@@ -15,7 +15,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none !important;
 }
 
 html { scroll-behavior: smooth; }
@@ -34,15 +33,14 @@ body {
 /* serif — display headings */
 h1, h2, h3 {
     font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
     font-weight: 400;
     line-height: 1.2;
     color: var(--ink);
 }
 
-h1 { font-size: clamp(36px, 6vw, 80px); letter-spacing: -0.02em; }
-h2 { font-size: clamp(28px, 3.5vw, 48px); letter-spacing: -0.01em; }
-h3 { font-size: 20px; }
+
+h1 { font-size: clamp(52px, 8vw, 108px); margin-bottom: 20px; letter-spacing: -0.02em; }
+h2 { font-size: clamp(28px, 4vw, 44px); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
 
 /* sans — body text, labels, captions */
 p, li, span, a, label, figcaption {
@@ -72,34 +70,6 @@ body::after {
 }
 
 /* ============================================
-   CUSTOM CURSOR
-   ============================================ */
-.cursor {
-    width: 10px;
-    height: 10px;
-    background: var(--teal);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
-    mix-blend-mode: multiply;
-}
-.cursor-ring {
-    width: 32px;
-    height: 32px;
-    border: 1px solid var(--teal);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.35s ease;
-    opacity: 0.6;
-}
-
-/* ============================================
    NAVIGATION
    ============================================ */
 nav {
@@ -118,7 +88,6 @@ nav {
     filter: contrast(1.1);
     transition: transform 0.3s ease;
 }
-.logo:hover { transform: rotate(-6deg) scale(1.08); }
 
 nav ul {
     display: flex;
@@ -126,7 +95,7 @@ nav ul {
 }
 
 nav ul li a {
-    font-size: 11px;
+    font-size: 15px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     padding: 8px 18px;
@@ -198,7 +167,7 @@ nav .fas { display: none; font-size: 20px; }
     padding: 13px 36px;
     border: 1px solid rgba(255,255,255,0.2);
     color: var(--paper);
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     transition: all 0.3s ease;
@@ -215,7 +184,7 @@ nav .fas { display: none; font-size: 20px; }
     transition: transform 0.3s ease;
     z-index: -1;
 }
-.btn:hover { color: var(--ink); border-color: var(--teal); }
+.btn:hover { color: var(--teal); border-color: var(--teal) }
 .btn:hover::before { transform: translateX(0); }
 
 /* ============================================
@@ -231,7 +200,6 @@ nav .fas { display: none; font-size: 20px; }
 }
 
 #header::before {
-    content: '001';
     position: absolute;
     bottom: -4%; right: -1%;
     font-family: fields, sans-serif;
@@ -304,7 +272,6 @@ nav .fas { display: none; font-size: 20px; }
 
 .header-text {
     font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
     font-size: clamp(38px, 6vw, 90px);
     line-height: 1.3;
 }
@@ -360,16 +327,19 @@ nav .fas { display: none; font-size: 20px; }
     max-width: 1300px;
 }
 
-.about-text { position: relative; }
-
 .about-text p {
+    position: relative;
     font-family: 'Instrument Serif', Georgia, serif;
-    font-size: clamp(24px, 2.8vw, 42px);
+    font-size: clamp(25px, 8vw, 45px);
     line-height: 1.55;
     font-weight: 400;
 }
-.about-text p em { font-style: italic; color: var(--teal-dim); }
-.about-text .highlight {
+
+.about-text p .highlight {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(25px, 8vw, 45px);
+    line-height: 1.55;
+    font-weight: 400;
     background: linear-gradient(transparent 58%, rgba(0,184,184,0.18) 58%);
 }
 
@@ -415,7 +385,6 @@ nav .fas { display: none; font-size: 20px; }
 }
 
 #contact::before {
-    content: 'HELLO';
     position: absolute;
     bottom: 40px; right: -2%;
     font-family: fields, sans-serif;
@@ -442,7 +411,6 @@ nav .fas { display: none; font-size: 20px; }
 
 .sub-title {
     font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
     font-size: clamp(44px, 6.5vw, 86px);
     color: var(--paper);
     line-height: 1.0;
@@ -451,13 +419,13 @@ nav .fas { display: none; font-size: 20px; }
 }
 
 .contact-left  { flex-basis: 35%; min-width: 260px; }
-.contact-right { flex-basis: 50%; min-width: 280px; }
 
 .contact-list ul { border-top: 1px solid rgba(255,255,255,0.08); }
 
 .contact-list ul li a {
     color: rgba(242,237,228,0.55);
-    font-size: 16px;
+    font-size: 18px;
+    font-family: fields, sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -469,35 +437,6 @@ nav .fas { display: none; font-size: 20px; }
 .contact-list ul li a::after { content: '↗'; opacity: 0; transform: translateX(-6px); transition: all 0.3s ease; }
 .contact-list ul li a:hover { color: var(--teal-bright); padding-left: 8px; }
 .contact-list ul li a:hover::after { opacity: 1; transform: translateX(0); }
-
-.contact-right form { display: flex; flex-direction: column; }
-
-form input, form textarea {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    outline: none;
-    background: transparent;
-    padding: 20px 0;
-    color: var(--paper);
-    font-size: 18px;
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
-    border-radius: 0;
-    transition: border-color 0.3s ease;
-}
-form input:focus, form textarea:focus { border-bottom-color: var(--teal); }
-form input::placeholder, form textarea::placeholder { color: rgba(242,237,228,0.2); }
-form textarea { resize: none; min-height: 120px; }
-form .btn { align-self: flex-start; margin-top: 32px; }
-
-#msg {
-    color: var(--teal);
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    margin-top: 12px;
-    display: block;
-}
 
 /* ============================================
    FOOTER / COPYRIGHT
@@ -511,62 +450,6 @@ form .btn { align-self: flex-start; margin-top: 32px; }
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: rgba(242,237,228,0.18);
-}
-
-/* ============================================
-   WORK PAGE
-   ============================================ */
-#work-hero {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    overflow: hidden;
-}
-
-#work-hero::before {
-    content: 'WORK';
-    position: absolute;
-    bottom: -4%; left: -2%;
-    font-family: fields, sans-serif;
-    font-weight: 200;
-    font-size: clamp(140px, 24vw, 320px);
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(0, 184, 184, 0.08);
-    pointer-events: none;
-    z-index: 0;
-    letter-spacing: -0.05em;
-}
-
-.work-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 120px 5% 80px;
-    position: relative;
-    z-index: 1;
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.work-title {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
-    font-size: clamp(52px, 8vw, 108px);
-    margin-bottom: 40px;
-    letter-spacing: -0.02em;
-}
-
-.work-grid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-    max-width: 700px;
 }
 
 /* ============================================
@@ -611,19 +494,16 @@ form .btn { align-self: flex-start; margin-top: 32px; }
 
 .play-title {
     font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
     font-size: clamp(52px, 8vw, 108px);
     margin-bottom: 40px;
     letter-spacing: -0.02em;
 }
 
 .play-desc {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-size: clamp(20px, 2.5vw, 32px);
+    font-size: 18px;
     line-height: 1.6;
-    opacity: 0.75;
-    margin-bottom: 60px;
-    max-width: 700px;
+    opacity: 0.6;
+    margin-bottom: 16px;
 }
 
 .projects-grid {
@@ -636,7 +516,6 @@ form .btn { align-self: flex-start; margin-top: 32px; }
 
 /* ============================================
    PROJECT CARDS
-   Shared between work and play pages.
    ============================================ */
 .project-card {
     border: 1px solid rgba(0,0,0,0.1);
@@ -661,38 +540,11 @@ form .btn { align-self: flex-start; margin-top: 32px; }
 .project-card:hover { border-color: var(--teal); transform: translateY(-4px); }
 .project-card:hover::before { opacity: 0.2; }
 
-.project-number {
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 16px;
-    display: block;
-}
-
-.project-title {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
-    font-size: clamp(28px, 4vw, 44px);
-    color: var(--ink);
-    margin-bottom: 16px;
-    line-height: 1.2;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.project-arrow {
-    font-size: 28px;
-    color: var(--teal);
-    transition: transform 0.3s ease;
-}
-.project-card:hover .project-arrow { transform: translateX(6px); }
-
 .project-desc {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.6;
     opacity: 0.6;
+    margin-bottom: 16px;
 }
 
 /* ============================================
@@ -735,7 +587,6 @@ form .btn { align-self: flex-start; margin-top: 32px; }
 
 .cs-title {
     font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
     font-size: clamp(36px, 6vw, 80px);
     letter-spacing: -0.02em;
     margin-bottom: 32px;
@@ -856,7 +707,6 @@ form .btn { align-self: flex-start; margin-top: 32px; }
 }
 .cs-impact p {
     font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
     font-size: clamp(16px, 2vw, 22px);
     line-height: 1.6;
     opacity: 0.75;
@@ -886,8 +736,7 @@ form .btn { align-self: flex-start; margin-top: 32px; }
 }
 
 @media only screen and (max-width: 600px) {
-    * { cursor: auto !important; }
-    .cursor, .cursor-ring { display: none; }
+
 
     nav .fas { display: block; color: var(--ink); }
     nav ul {
