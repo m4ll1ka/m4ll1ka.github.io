@@ -1,202 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Snacks.com UX Case Study</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      margin: 0;
-      background: #fafafa;
-      color: #111;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 32px 20px;
-    }
-
-    section {
-      margin-bottom: 80px;
-    }
-
-    h1 {
-      font-size: 36px;
-      margin-bottom: 8px;
-    }
-
-    h2 {
-      font-size: 24px;
-      margin-bottom: 16px;
-    }
-
-    h3 {
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
-
-    .tldr {
-      font-size: 18px;
-      color: #444;
-      margin-bottom: 24px;
-    }
-
-    .meta {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-bottom: 24px;
-      font-size: 14px;
-      color: #555;
-    }
-
-    .meta div {
-      background: #fff;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #eee;
-    }
-
-    img {
-      width: 100%;
-      border-radius: 12px;
-      border: 1px solid #eee;
-    }
-
-    .feature {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      align-items: start;
-      margin-bottom: 60px;
-    }
-
-    .feature-text p {
-      margin-bottom: 12px;
-    }
-
-    .label {
-      font-weight: 600;
-    }
-
-    .impact-box {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      border: 1px solid #eee;
-    }
-
-    @media (max-width: 768px) {
-      .feature {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snacks.com Redesign — Mallika Pallipuram</title>
+    <link rel="stylesheet" href="https://use.typekit.net/xeq6kow.css">
+    <link rel="icon" type="image/png" href="https://m4ll1ka.github.io/docs/assets/images/melogopng.png">
+    <link rel="stylesheet" href="https://m4ll1ka.github.io/docs/assets/css/style.css">
 </head>
+
 <body>
-  <div class="container">
 
-    <!-- Overview -->
-    <section>
-      <h1>Enhancing Snack Discovery on Snacks.com</h1>
-      <p class="tldr">
-        Redesigned the Snacks.com mobile experience to improve product discovery and increase cart value among college students through incentive-driven, social, and curated features.
-      </p>
+<!---------header--------->
+<div id="cs-hero">
+    <nav>
+            <a href="https://m4ll1ka.github.io"><img src="https://m4ll1ka.github.io/docs/assets/images/melogopng.png" class="logo"></a>
+            <ul id="sidemenu">
+                <i class="fas fa-times" onclick="closemenu()"></i>
+                <li><a href="https://m4ll1ka.github.io/#about">About</a></li>
+                <li><a href="https://m4ll1ka.github.io/work.html">Work</a></li>
+                <li><a href="https://m4ll1ka.github.io/play.html">Play</a></li>
+                <li><a href="https://m4ll1ka.github.io/#contact">Contact</a></li>
+            </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
+        </nav>
 
-      <div class="meta">
-        <div><strong>Role:</strong> UX Designer. I was responsible for mapping information architecture and prioritizing impactful web pages, consumer journey mapping, initial concept sketching, making interactive prototypes using Figma, user testing, and iteration.</div>
-        <div><strong>Timeline:</strong> 14 weeks</div>
-        <div><strong>Team:</strong> 6 designers, 2 PepsiCo designers (mentors)</div>
-        <div><strong>Deliverables:</strong> Research, wireframes, prototypes</div>
-      </div>
+    <div class="cs-header">
+        <a href="https://m4ll1ka.github.io/work.html" class="cs-back">← Back to work</a>
 
-      <img src="https://m4ll1ka.github.io/docs/assets/images/" alt="Final design" />
-    </section>
+        <h1 class="cs-title">Enhancing Snack Discovery on Snacks.com</h1>
+
+        <p class="cs-tldr">
+            Redesigned the Snacks.com mobile experience to improve product discovery and increase cart value among college students through incentive-driven, social, and curated features.
+        </p>
+
+        <div class="cs-meta">
+            <div class="cs-meta-item">
+                <span class="cs-meta-label">Role</span>
+                <span class="cs-meta-value">UX Designer</span>
+            </div>
+            <div class="cs-meta-item">
+                <span class="cs-meta-label">Timeline</span>
+                <span class="cs-meta-value">14 weeks</span>
+            </div>
+            <div class="cs-meta-item">
+                <span class="cs-meta-label">Team</span>
+                <span class="cs-meta-value">6 designers + 2 PepsiCo mentors</span>
+            </div>
+            <div class="cs-meta-item">
+                <span class="cs-meta-label">Deliverables</span>
+                <span class="cs-meta-value">Research, wireframes, prototypes</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---------body--------->
+<div class="cs-body">
+
+    <img class="cs-hero-img" src="https://m4ll1ka.github.io/docs/assets/images/" alt="Final design" />
 
     <!-- Problem -->
-    <section>
-      <h2>Problem Framing</h2>
-      <p>
-        Snacks.com functions as a standard e-commerce platform, limiting engagement and failing to differentiate from grocery or delivery apps. College students—high-frequency snack consumers—primarily discover snacks through social media but purchase elsewhere.
-      </p>
-      <p><span class="label">User Group:</span> College students (mobile-first, budget-conscious, socially influenced)</p>
-      <p><span class="label">How might we:</span></p>
-      <ul>
-        <li>Encourage users to explore and discover new snacks?</li>
-        <li>Increase cart value without relying solely on discounts?</li>
-        <li>Support social and group-based snacking behaviors?</li>
-      </ul>
-    </section>
+    <div class="cs-section">
+        <p class="cs-section-label">Overview</p>
+        <h2>Problem Framing</h2>
+        <p>
+            Snacks.com functions as a standard e-commerce platform, limiting engagement and failing to differentiate from grocery or delivery apps. College students — high-frequency snack consumers — primarily discover snacks through social media but purchase elsewhere.
+        </p>
+        <p><strong style="font-weight: 500; opacity: 1;">User group:</strong> College students — mobile-first, budget-conscious, socially influenced.</p>
+        <p style="margin-bottom: 8px;"><strong style="font-weight: 500; opacity: 1;">How might we:</strong></p>
+        <ul>
+            <li>Encourage users to explore and discover new snacks?</li>
+            <li>Increase cart value without relying solely on discounts?</li>
+            <li>Support social and group-based snacking behaviors?</li>
+        </ul>
+    </div>
 
     <!-- Features -->
+    <div class="cs-section">
+        <p class="cs-section-label">Process</p>
 
-    <!--  -->
-    <section class="feature">
-      <div class="feature-text">
-        <h2>Munch Meter</h2>
-        <p><span class="label">Question:</span> How might we incentivize users to add more to their cart without being intrusive?</p>
-        <p><span class="label">Method:</span> Co-design workshop, think-aloud testing</p>
-        <p><span class="label">Finding:</span> Users respond to visible progress toward rewards but dislike pushy UI.</p>
-        <p><span class="label">Design Outcome:</span> A collapsible progress-based reward meter that tracks incentives like free shipping.</p>
-        <p><span class="label">Impact:</span> Encourages higher cart value through subtle behavioral nudging.</p>
-      </div>
-      <div>
-        <img src="https://m4ll1ka.github.io/docs/assets/images/" alt="Munch Meter UI" />
-      </div>
-    </section>
+        <div class="cs-feature">
+            <div class="cs-flow">
+                <h2>Munch Meter</h2>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Question</span>
+                    <span class="cs-flow-text">How might we incentivize users to add more to their cart without being intrusive?</span>
+                </div>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Method</span>
+                    <span class="cs-flow-text">Co-design workshop, think-aloud testing</span>
+                </div>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Finding</span>
+                    <span class="cs-flow-text">Users respond to visible progress toward rewards but dislike pushy UI.</span>
+                </div>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Outcome</span>
+                    <span class="cs-flow-text">A collapsible progress-based reward meter that tracks incentives like free shipping.</span>
+                </div>
+            </div>
+            <img class="cs-feature-img" src="https://m4ll1ka.github.io/docs/assets/images/" alt="Munch Meter UI" />
+        </div>
 
-    <!-- Feature 2 -->
-    <section class="feature">
-      <div class="feature-text">
-        <h2>Collaborative Variety Pack Builder</h2>
-        <p><span class="label">Question:</span> How might we support shared snack purchasing?</p>
-        <p><span class="label">Method:</span> Co-design workshop, journey mapping</p>
-        <p><span class="label">Finding:</span> Snack planning is social but fragmented across tools.</p>
-        <p><span class="label">Design Outcome:</span> A shareable pack builder enabling multiple contributors.</p>
-        <p><span class="label">Impact:</span> Reduces coordination friction and supports real-world behavior.</p>
-      </div>
-      <div>
-        <img src="https://m4ll1ka.github.io/docs/assets/images/" alt="Collaborative builder" />
-      </div>
-    </section>
+        <div class="cs-feature">
+            <div class="cs-flow">
+                <h2>Collaborative Variety Pack Builder</h2>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Question</span>
+                    <span class="cs-flow-text">How might we support shared snack purchasing?</span>
+                </div>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Method</span>
+                    <span class="cs-flow-text">Co-design workshop, journey mapping</span>
+                </div>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Finding</span>
+                    <span class="cs-flow-text">Snack planning is social but fragmented across tools.</span>
+                </div>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Outcome</span>
+                    <span class="cs-flow-text">A shareable pack builder enabling multiple contributors.</span>
+                </div>
+            </div>
+            <img class="cs-feature-img" src="https://m4ll1ka.github.io/docs/assets/images/" alt="Collaborative builder" />
+        </div>
 
-    <!-- Feature 3 -->
-    <section class="feature">
-      <div class="feature-text">
-        <h2>Bundles & Themed Packs</h2>
-        <p><span class="label">Question:</span> How might we reduce choice overload?</p>
-        <p><span class="label">Method:</span> Survey, think-aloud testing</p>
-        <p><span class="label">Finding:</span> Users prefer curated, value-driven bundles tied to occasions.</p>
-        <p><span class="label">Design Outcome:</span> Pre-built themed snack packs with savings highlighted.</p>
-        <p><span class="label">Impact:</span> Simplifies decisions and increases cart size.</p>
-      </div>
-      <div>
-        <img src="https://m4ll1ka.github.io/docs/assets/images/" alt="Bundles UI" />
-      </div>
-    </section>
+        <div class="cs-feature">
+            <div class="cs-flow">
+                <h2>Bundles & Themed Packs</h2>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Question</span>
+                    <span class="cs-flow-text">How might we reduce choice overload?</span>
+                </div>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Method</span>
+                    <span class="cs-flow-text">Survey, think-aloud testing</span>
+                </div>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Finding</span>
+                    <span class="cs-flow-text">Users prefer curated, value-driven bundles tied to occasions.</span>
+                </div>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Outcome</span>
+                    <span class="cs-flow-text">Pre-built themed snack packs with savings highlighted.</span>
+                </div>
+            </div>
+            <img class="cs-feature-img" src="https://m4ll1ka.github.io/docs/assets/images/" alt="Bundles UI" />
+        </div>
+    </div>
 
     <!-- Impact -->
-    <section>
-      <h2>Overall Impact</h2>
-      <div class="impact-box">
-        <p>Increased engagement through interactive and social features</p>
-        <p>Encouraged higher cart value via rewards and bundling</p>
-        <p>Reduced decision fatigue through guided experiences</p>
-        <p>Improved differentiation from traditional e-commerce platforms</p>
-      </div>
-    </section>
+    <div class="cs-section">
+        <p class="cs-section-label">Conclusion</p>
+        <h2>Overall Impact</h2>
+        <div class="cs-impact">
+            <p>Increased engagement through interactive and social features</p>
+            <p>Encouraged higher cart value via rewards and bundling</p>
+            <p>Reduced decision fatigue through guided experiences</p>
+            <p>Improved differentiation from traditional e-commerce platforms</p>
+        </div>
+    </div>
 
     <!-- Reflection -->
-    <section>
-      <h2>Reflection</h2>
-      <p><strong>Simplicity over flexibility:</strong> Users preferred guided experiences over full customization.</p>
-      <p><strong>Designing for behavior:</strong> Grounding decisions in real behaviors led to stronger outcomes.</p>
-      <p><strong>Future scope:</strong> Validate with higher fidelity testing and measure retention and repeat use.</p>
-    </section>
+    <div class="cs-section">
+        <p class="cs-section-label">Reflection</p>
+        <h2>What I learned</h2>
+        <div class="cs-reflection">
+            <div class="cs-reflection-item">
+                <h3>Simplicity over flexibility</h3>
+                <p>Users preferred guided experiences over full customization — less choice led to more confidence.</p>
+            </div>
+            <div class="cs-reflection-item">
+                <h3>Designing for behavior</h3>
+                <p>Grounding decisions in real observed behaviors led to stronger, more resonant design outcomes.</p>
+            </div>
+            <div class="cs-reflection-item">
+                <h3>Future scope</h3>
+                <p>Validate with higher fidelity testing and measure retention and repeat use over time.</p>
+            </div>
+        </div>
+    </div>
 
-  </div>
+</div>
+
+<!---------footer--------->
+<div style="background: var(--ink); padding: 40px 5%; text-align: center;">
+    <p style="font-family: fields, sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(242,237,228,0.2);">
+        © Mallika Pallipuram 2026
+    </p>
+</div>
+
+<!---------scripts--------->
+<script src="https://m4ll1ka.github.io/script.js"></script>
+
 </body>
 </html>
