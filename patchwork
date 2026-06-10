@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patchwork — Mallika Pallipuram</title>
+    <link rel="stylesheet" href="https://use.typekit.net/xeq6kow.css">
+    <link rel="icon" type="image/png" href="https://m4ll1ka.github.io/docs/assets/images/melogopng.png">
+    <link rel="stylesheet" href="https://m4ll1ka.github.io/docs/assets/css/style.css">
+</head>
+
+<body>
+
+<!---------header--------->
+<div id="cs-hero">
+    <nav>
+            <a href="https://m4ll1ka.github.io"><img src="https://m4ll1ka.github.io/docs/assets/images/melogopng.png" class="logo"></a>
+            <ul id="sidemenu">
+                <i class="fas fa-times" onclick="closemenu()"></i>
+                <li><a href="https://m4ll1ka.github.io/#about">About</a></li>
+                <li><a href="https://m4ll1ka.github.io/work.html">Work</a></li>
+                <li><a href="https://m4ll1ka.github.io/play.html">Play</a></li>
+                <li><a href="https://m4ll1ka.github.io/#contact">Contact</a></li>
+            </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
+        </nav>
+
+    <div class="cs-header">
+        <a href="https://m4ll1ka.github.io/work.html" class="cs-back">← Back to work</a>
+
+        <h1 class="cs-title">Patchwork</h1>
+
+        <p class="cs-tldr">
+            Patchwork is a speculative app based on location proximity, designed to help connect queer people to their community in Bloomington.
+        </p>
+
+        <div class="cs-meta">
+            <div class="cs-meta-item">
+                <span class="cs-meta-label">Role</span>
+                <span class="cs-meta-value">UX Designer</span>
+            </div>
+            <div class="cs-meta-item">
+                <span class="cs-meta-label">Timeline</span>
+                <span class="cs-meta-value">4 weeks</span>
+            </div>
+            <div class="cs-meta-item">
+                <span class="cs-meta-label">Team</span>
+                <span class="cs-meta-value">4 designers</span>
+            </div>
+            <div class="cs-meta-item">
+                <span class="cs-meta-label">Deliverables</span>
+                <span class="cs-meta-value">Research, prototypes, documentation of process</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---------body--------->
+<div class="cs-body">
+
+    <img class="cs-hero-img" src="https://m4ll1ka.github.io/docs/assets/images/" alt="Final design" />
+
+    <!-- Problem -->
+    <div class="cs-section">
+        <p class="cs-section-label">Overview</p>
+        <h2>Problem Framing</h2>
+        <p>
+          The 2026 ACM DIS Student Design Competition challenged us to conceive of design as an open-ended cycle of rethinking, remaking, and redesigning, in order to confront global challenges.
+          We chose to reimagine the process of finding community in the digital age, and focused on queer students at Indiana University Bloomington that are looking to broaden their circle but struggling to find a local queer community.
+          Through this lens of social justice, our goal was to introduce a new way of celebrating queer visibility and provide opportunity for greater community engagement within local queer spaces. 
+          With stronger engagement and visibility, comes greater possibility for collective action for the queer community.
+        </p>
+        <p style="margin-bottom: 8px;"><strong style="font-weight: 500; opacity: 1;">How might we:</strong></p>
+        <ul>
+            <li>Connect queer students on campus without putting their identity and safety at risk</li>
+            <li>Utilize proximity and physical computing</li>
+            <li>Facilitate the creation of connection and community in a natural way</li>
+        </ul>
+    </div>
+
+    <!-- Features -->
+    <div class="cs-section">
+        <p class="cs-section-label">Features</p>
+
+        <div class="cs-feature">
+            <div class="cs-flow">
+                <h2>The Patch</h2>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Method</span>
+                    <span class="cs-flow-text">Co-design Workshop, Interviews</span>
+                </div>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Finding</span>
+                    <span class="cs-flow-text">We visited the LGBTQ+ Center on campus and conducted interviews with students. 
+                    Interviewees voiced concerns over the changing political climate, especially in regards the ability to express themselves freely. 
+                    Community formation and visibility in general is challenging with the concerns for safety, censorship, and equal rights.
+                    Queer identity has historically been expressed through a variety of symbols, fiber arts, and worn accessories. 
+                    Thus, we identified that symbols and visual cues are important in expressing identity. 
+                    </span>
+                </div>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Outcome</span>
+                    <span class="cs-flow-text">
+                    Each person has a single Patch that they can customize with up to 10 pins. 
+                    A user's Patch provides a digital profile for self-expression using art, icons, and design. 
+                    Rather than a photo or biography, users anonymously represent themselves through their Patch and can view the Patches of others who they've Stiched with. 
+                    Organizations on the app will also have a location-bound patch to represent their community.</span>
+                </div>
+            </div>
+            <img class="cs-feature-img" src="https://m4ll1ka.github.io/docs/assets/images/" alt="The Patch" />
+        </div>
+
+        <div class="cs-feature">
+            <div class="cs-flow">
+                <h2>Stitch</h2>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Method</span>
+                    <span class="cs-flow-text">Co-design Workshop</span>
+                </div>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Finding</span>
+                    <span class="cs-flow-text">
+                    Queer identity is complex, especially as a person of color, an interviewee noted that they often feel like an outsider in bigger queer spaces.
+                    The interviewee mentioned that they don’t feel the need to join a big group, what’s more important to them is having queer friends they can relate to over having a big group where they cannot connect to everybody on a deeper level.
+                    This highlighted the need for individual, personal connections in community formation. 
+                    </span>
+                </div>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Outcome</span>
+                    <span class="cs-flow-text">
+                    Stitching with another user is simple. 
+                    Pass by them on the street and gain a Stitch that links both of your Patches. 
+                    Stitching a user adds them to your Quilt, a grand tapestry that showcases the local connections you've made with fellow queer people in your area. 
+                    As you frequent the same spaces you can continue to gain Stitches. As a bonus, for every common interest you've shared on your Patch, you gain a Stitch. 
+                    As users gain more Stitches with another Patch, that Patch then moves closer and closer to the center of their Quilt. 
+                    Accumulate enough Stitches and you gain the ability to Connect.</span>
+                </div>
+            </div>
+            <img class="cs-feature-img" src="https://m4ll1ka.github.io/docs/assets/images/" alt="Stitch" />
+        </div>
+
+        <div class="cs-feature">
+            <div class="cs-flow">
+                <h2>Connect</h2>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Method</span>
+                    <span class="cs-flow-text">Usability testing</span>
+                </div>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Finding</span>
+                    <span class="cs-flow-text">We conducted usability testing with participants who were asked to complete a set of tasks while thinking aloud. 
+                    We found that the connect button on the request page confused participants; at first look they felt the interaction to be similar to follow or unfollow button and rather than a way to see contact details of people who they had connected with previously.
+                    The visualization of stitches between two users was also unclear for participants.
+                    Thus, we added more contextual information about the process of connecting with another user and made changes in wording and placement of buttons to make functionality clear to users.
+                </div>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-label">Outcome</span>
+                    <span class="cs-flow-text">To Connect, users can visit their requests page and choose to share their pre-established contact details with that Patch's user if they wish. 
+                    Both users must offer to connect before either can view the others contact details. 
+                    At this point, the users are suggested an upcoming local event to meet at and can message through another platform and make plans or get to know one another better. 
+                    We did not include a messaging feature in our app to encourage users to meet at in person events.
+                    </span>
+                </div>
+            </div>
+            <img class="cs-feature-img" src="https://m4ll1ka.github.io/docs/assets/images/" alt="Connect" />
+        </div>
+
+        <div class="cs-feature">
+            <div class="cs-flow">
+                <h2>The Quilt</h2>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-text">
+                    The quilt view shows all of the stitches you have made thus far, with your patch in the center of the quilt. 
+                    These stitches include the stitches you’ve made with other users as well as stitches you’ve made to patches of businesses. C
+                    lick to enlarge a specific patch to view their pins up close. 
+                    </span>
+                </div>
+            </div>
+            <img class="cs-feature-img" src="https://m4ll1ka.github.io/docs/assets/images/" alt="Quilt" />
+        </div>
+
+        <div class="cs-feature">
+            <div class="cs-flow">
+                <h2>The Map</h2>
+                <div class="cs-flow-item">
+                    <span class="cs-flow-text">
+                    To view queer-friendly organizations, businesses, and groups users can visit the map page. 
+                    On this page the map of the local area is shown, scatterd with locations that have joined Patchwork and designed a Patch for their organization. 
+                    Upcoming events are indicated by stars on the Patch at the organization they correspond to. 
+                    These stars provide readily available event information, tickets, and meeting times for both one-time and reoccuring events.
+                    </span>
+                </div> 
+            </div>
+            <img class="cs-feature-img" src="https://m4ll1ka.github.io/docs/assets/images/" alt="Map" />
+        </div>
+        
+    </div>
+
+    <!-- Impact -->
+    <div class="cs-section">
+        <p class="cs-section-label">Conclusion</p>
+        <h2>Overall Impact</h2>
+        <div class="cs-impact">
+            <p>Exploration of community formation within a marginalized group on a college campus</p>
+            <p>Novel way of encouraging connection among people with similar interests and experiences</p>
+            <p>Our design served as a way to show queer students that they are not alone, as it may feel that way on a large college campus, and a bridge to their larger community</p>
+        </div>
+    </div>
+
+    <!-- Reflection -->
+    <div class="cs-section">
+        <p class="cs-section-label">Reflection</p>
+        <h2>What I learned</h2>
+        <div class="cs-reflection">
+            <div class="cs-reflection-item">
+                <h3>Balancing Visibility and Safety</h3>
+                <p>We aimed to prioritize safety over all else, as our app focuses on queer students. 
+                We did not want our app to be misused by bad actors to target queer communities, and balancing visibility and the personal safety of users was challenging.
+                Our best approach to tackle this issue was to create user-facing accounts that are entirely anonymous unless explicit permission is given to share contact information and that location services are entirely private.
+                However, we acknowledged that we cannot foresee how our app would actually be used in the real world and potential concerns.
+                </p>
+            </div>
+            <div class="cs-reflection-item">
+                <h3>Community Focused Projects and Research Methods</h3>
+                <p>While working on this project, I realized that I really enjoy working within local community focused problem spaces. 
+                I love engaging in participatory design through co-design workshops, as it provides more intimate and authentic insights than traditional research methods such as surveys or interviews, and allows you to interact with target users and get to know them in a different way!
+                The type of research method utilized is highly contingent upon the types of questions you are asking as a researcher and the problem space you are working within. 
+                I believe ethnographic research methods such as digital ethnography and observations would have been an interesting lens to examine this problem space through.  
+                </p>
+            </div>
+            <div class="cs-reflection-item">
+                <h3>Future scope</h3>
+                <p>
+                It would be interesting to actually have a physical patch that users can decorate and carry with them that would connect to the app. 
+                Utilizing physical computing to bridge the physical and digital elements of this design would allow for a tangible and engaging experience for users. 
+                This could be explored through technology such as conductive fibers, near field communication technology, or microcontrollers.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!---------footer--------->
+<div style="background: var(--ink); padding: 40px 5%; text-align: center;">
+    <p style="font-family: fields, sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(242,237,228,0.2);">
+        © Mallika Pallipuram 2026
+    </p>
+</div>
+
+<!---------scripts--------->
+<script src="https://m4ll1ka.github.io/script.js"></script>
+
+</body>
+</html>
