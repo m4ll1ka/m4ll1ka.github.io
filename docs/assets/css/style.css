@@ -652,7 +652,9 @@ nav .fas { display: none; font-size: 20px; }
 .cs-body h2 { margin-bottom: 24px; }
 .cs-body h3 { margin-bottom: 12px; }
 
-.cs-body p,
+.cs-body p{
+font-size: clamp(12px, 2vw, 18px);
+}
 .cs-body li,
 .cs-flow-text,
 .cs-reflection-item p {
@@ -762,8 +764,7 @@ nav .fas { display: none; font-size: 20px; }
     pointer-events: none;
 }
 .cs-impact p {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-size: clamp(16px, 2vw, 22px);
+    font-size: clamp(12px, 2vw, 18px);
     line-height: 1.6;
     opacity: 0.75;
     margin-bottom: 12px;
