@@ -85,7 +85,7 @@ nav {
 }
 
 .logo {
-    width: 80px;
+    width: 100px;
     filter: contrast(1.1);
     transition: transform 0.3s ease;
 }
