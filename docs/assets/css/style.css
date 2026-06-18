@@ -681,19 +681,29 @@ font-size: clamp(12px, 2vw, 18px);
     background: #ffffff;
     overflow: hidden;
     width: 100%;
-    height: 200px;
+    height: 100%;
     object-fit: cover;
     margin: 40px 0px 40px 0px;
 }
 
-.cs-hero-img,
+
 .cs-feature-img {
     object-fit: cover;
+    width: 100%;
+    height: 100%;
     background: rgba(10,10,10,0.04);
     border: 1px solid rgba(10,10,10,0.08);
     aspect-ratio: 4/3; 
 }
-.cs-hero-img    { aspect-ratio: 16/8; margin-bottom: 28px; }
+
+.css-hero-image {
+  aspect-ratio: 16/8;
+  margin-bottom: 28px;
+  width: 100%;    
+  height: 100%;   
+  object-fit: cover; 
+}
+                
 
 
 /*photo grid */
@@ -716,7 +726,7 @@ font-size: clamp(12px, 2vw, 18px);
 
 .grid-item img {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
 }
 
