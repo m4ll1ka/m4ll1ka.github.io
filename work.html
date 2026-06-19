@@ -7,10 +7,8 @@
     <title>Work — Mallika Pallipuram</title>
     <link rel="stylesheet" href="https://use.typekit.net/xeq6kow.css">
     <script src="https://kit.fontawesome.com/93b555f9c1.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://use.typekit.net/xeq6kow.css">
     <link rel="icon" type="image/png" href="https://m4ll1ka.github.io/docs/assets/images/melogopng.png">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://m4ll1ka.github.io/docs/assets/css/style.css">
+    <link rel="stylesheet" href="https://m4ll1ka.github.io/docs/assets/css/style.css">    
 </head>
 
 <body>
@@ -30,48 +28,108 @@
         </nav>
 
     <div class="play-content">
-        <h1>Selected Work</h1>
-        
-        <p class="play-desc">
-            Projects that I'm proud of!
-        </p>
+    <h1>Selected Work</h1>
 
-        <div class="projects-grid">
-            <!-- PROJECT 01 -->
-    <a href="https://m4ll1ka.github.io/ahf.html" class="project-card">
-        <h2>AI, Humanity, & The Future</h2>
-        <p class="project-desc">
-            A cultural probe deployed to understand public perceptions of AI.</p>
-    </a>
-
-    <!-- PROJECT 02 -->
-    <a href="https://m4ll1ka.github.io/snacks.html" class="project-card">
-        <h2>Snacks.com Redesign</h2>
-        <p class="project-desc">Reimagining the e-commerce experience for a snack brand with a renewed visual identity.</p>
-    </a>
-
-    <!-- PROJECT 03 -->
-    <a href="https://m4ll1ka.github.io/patchwork.html" class="project-card">
-        <h2>Patchwork</h2>
-        <p class="project-desc">A speculative app built around community expression.</p>
-    </a>
-
-    <!-- PROJECT 04 -->
-    <a href="https://m4ll1ka.github.io/forum.html" class="project-card">
-        <h2>Kaiteki.ai Parent Forum</h2>
-        <p class="project-desc">Designing a safe, AI-assisted space for parents to connect and share resources.</p>
-    </a>
-        </div>
+    <!-- Filter Pills -->
+    <div class="work-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="uxr">UX Research</button>
+        <button class="filter-btn" data-filter="ud">UI Design</button>
+        <button class="filter-btn" data-filter="gd">Graphic Design</button>
     </div>
+
+    <div class="projects-grid">
+        <!-- PROJECT 01 -->
+        <a href="https://m4ll1ka.github.io/ahf.html" class="project-card" data-category="uxr">
+            <div class="project-card-img">
+                <img src="https://m4ll1ka.github.io/docs/assets/images/Project_Logo.png" alt="AI, Humanity & The Future" />
+            </div>
+            <div class="project-card-body">
+                <span class="project-tag">UX Research</span>
+                <h2>AI, Humanity, & The Future</h2>
+                <p class="project-desc">Designed and deployed a cultural probe to explore public perceptions towards AI.</p>
+            </div>
+        </a>
+
+        <!-- PROJECT 02 -->
+        <a href="https://m4ll1ka.github.io/snacks.html" class="project-card" data-category="ud">
+            <div class="project-card-img">
+                <img src="https://m4ll1ka.github.io/docs/assets/images/snacks_preview" alt="Snacks.com Redesign" />
+            </div>
+            <div class="project-card-body">
+                <span class="project-tag">UI Design</span>
+                <h2>Snacks.com Redesign</h2>
+                <p class="project-desc">Redesigned the snack discovery and checkout experience.</p>
+            </div>
+        </a>
+
+        <!-- PROJECT 03 -->
+        <a href="https://m4ll1ka.github.io/patchwork.html" class="project-card" data-category="uxr">
+            <div class="project-card-img">
+                <img src="https://m4ll1ka.github.io/docs/assets/images/patchwork_preview" alt="Patchwork" />
+            </div>
+            <div class="project-card-body">
+                <span class="project-tag">UX Research</span>
+                <h2>Patchwork</h2>
+                <p class="project-desc">A new way to connect and find queer community on campus.</p>
+            </div>
+        </a>
+
+        <!-- PROJECT 04 -->
+        <a href="https://m4ll1ka.github.io/forum.html" class="project-card" data-category="ud">
+            <div class="project-card-img">
+                <img src="https://m4ll1ka.github.io/docs/assets/images/forum_preview" alt="Parent Forum" />
+            </div>
+            <div class="project-card-body">
+                <span class="project-tag">UI Design</span>
+                <h2>Parent Forum</h2>
+                <p class="project-desc">Designed a community space for parents to connect and share resources.</p>
+            </div>
+        </a>
+
+        <!-- PROJECT 05 -->
+        <a href="https://m4ll1ka.github.io/collective.html" class="project-card" data-category="gd">
+            <div class="project-card-img">
+                <img src="https://m4ll1ka.github.io/docs/assets/images/collective_preview" alt="The Collective" />
+            </div>
+            <div class="project-card-body">
+                <span class="project-tag">Graphic Design</span>
+                <h2>The Collective Magazine</h2>
+                <p class="project-desc">Designed merchandise and branding for a student run arts and culture magazine.</p>
+            </div>
+        </a>
+    </div>
+</div>
 </div>
 
 <!---------footer--------->
-<div style="background: var(--ink); padding: 40px 5%; text-align: center;">
-    <p style="font-family: fields, sans-serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(242,237,228,0.2);">
+<div class="copyright">
+    <p class="copyright-text">
         © Mallika Pallipuram 2026
     </p>
 </div>
 
 <script src="https://m4ll1ka.github.io/script.js"></script>
+<script>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.dataset.filter;
+
+            cards.forEach(card => {
+                if (filter === 'all' || card.dataset.category === filter) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
