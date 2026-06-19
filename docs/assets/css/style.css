@@ -20,7 +20,6 @@
 html { scroll-behavior: smooth; }
 
 body {
-    background-color: var(--paper);
     color: var(--ink);
     overflow-x: hidden;
 }
@@ -56,7 +55,7 @@ a { text-decoration: none; }
 
 ul { list-style: none; }
 
-img { display: block; width: 100%; padding: 20px; }
+img { display: block; width: 100%}
 
 /* ============================================
    GRAIN TEXTURE
@@ -674,34 +673,38 @@ font-size: clamp(12px, 2vw, 18px);
 .cs-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--teal); opacity: 1; }
 
 /* images */
-.cs-section-img { 
-    display: flex;
+.cs-hero-img {
+    aspect-ratio: 16/8;
+    object-fit: contain;
+    margin-bottom: 40px;
     border-radius: 8px;
+    overflow: hidden;
     border: 1px solid rgba(10,10,10,0.08);
     background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cs-section-img { 
+    border-radius: 8px;
     overflow: hidden;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    margin: 40px 0px 40px 0px;
+    border: 1px solid rgba(10,10,10,0.08);
+    background: #ffffff;
+    max-height: 480px;
+    object-fit: contain;
+    margin: 40px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 
 .cs-feature-img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    background: rgba(10,10,10,0.04);
+    border-radius: 8px;
+    overflow: hidden;
     border: 1px solid rgba(10,10,10,0.08);
+    background: #ffffff;
+    object-fit: contain;
+    margin: 40px 0;
     aspect-ratio: 4/3; 
-}
-
-.css-hero-image {
-  aspect-ratio: 16/8;
-  margin-bottom: 28px;
-  width: 100%;    
-  height: 100%;   
-  object-fit: cover; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
                 
 
@@ -724,10 +727,10 @@ font-size: clamp(12px, 2vw, 18px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.grid-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.grid-item .grid-img {
+    max-height: 480px;
+    object-fit: contain;
+    width: 100%;
 }
 
 /* image caption */
