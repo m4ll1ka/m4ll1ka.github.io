@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gesture Paint</title>
+  <script src="https://kit.fontawesome.com/93b555f9c1.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://use.typekit.net/xeq6kow.css">
+  <link rel="stylesheet" href="https://m4ll1ka.github.io/docs/assets/css/style.css" />
+  <style>
+    /* ─── Reset & base ─────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+    --toolbar-width: 300px;
+    --bg: #1a1a1a;
+    --surface: #242424;
+    --surface2: #2e2e2e;
+    --border: rgba(255,255,255,0.08);
+    --text: #e8e8e8;
+    --text-muted: #888;
+    --accent: #ffffff;
+    --pen-color: #4ade80;
+    --eraser-color: #f87171;
+    --pause-color: #94a3b8;
+
+    /* photostrip palette — warm analog film feel */
+    --film-cream: #f5f0e8;
+    --film-border: #d4c9b0;
+    --film-shadow: rgba(0,0,0,0.45);
+    --film-machine: #2c2c2c;
+    --film-machine-light: #3a3a3a;
+    --strip-accent: #c8a96e;
+    }
+
+    .hidden { display: none !important; }
+
+    #tool-header {
+    text-align: center;
+    padding-top: 124px; 
+    padding-left: 5%;
+    padding-bottom: 24px;
+    }
+
+    #tool-header h2 {
+    font-size: 32px;
+    margin-bottom: 8px;
+    display: block; /* override the flex from portfolio h2 */
+    }
+
+    #tool-header p {
+    font-size: 15px;
+    opacity: 0.6;
+    }
+
+    #tool-body {
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    padding: 0 40px 40px;
+    height: calc(100vh - 180px); /* 72px nav + ~60px header + buffer */
+    align-items: stretch;
+    max-width: 1300px;
+    margin: 0 auto;       
+    }
+
+    /* ─── Toolbar ───────────────────────────────── */
+    #toolbar {
+    width: 260px;
+    min-width: 260px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 14px;
+    gap: 24px;
+    overflow-y: auto;
+    }
+
+    .tool-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    }
+
+    .tool-section-label {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    color: var(--accent);
+    text-transform: lowercase;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--border);
+    }
+
+    /* Tool cards */
+    .tool-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 10px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: default;
+    position: relative;
+    transition: background 0.15s;
+    }
+
+    .tool-card.active {
+    background: var(--surface2);
+    border-color: var(--border);
+    }
+
+    .gesture-icon {
+    font-size: 22px;
+    line-height: 1;
+    min-width: 28px;
+    text-align: center;
+    }
+
+    .tool-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    }
+
+    .tool-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    text-transform: lowercase;
+    }
+
+    .tool-hint {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.3;
+    }
+
+    /* Active dot — colored indicator on the right edge */
+    .active-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: transparent;
+    margin-left: auto;
+    flex-shrink: 0;
+    transition: background 0.2s;
+    }
+
+    #tool-pen.active   .active-dot { background: var(--pen-color); }
+    #tool-eraser.active .active-dot { background: var(--eraser-color); }
+    #tool-none.active  .active-dot { background: var(--pause-color); }
+
+    /* Buttons */
+    .action-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 18px;
+    padding: 7px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+    text-transform: lowercase;
+    }
+
+    .action-btn:hover {
+    background: var(--surface2);
+    color: var(--text);
+    border-color: rgba(255,255,255,0.2);
+    }
+
+    /* Status */
+    .status-section { margin-top: auto; }
+
+    #status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 12px;
+    }
+
+    .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    }
+
+    #status-text{
+    color: var(--accent);
+    font-family: inherit;
+    font-size: 18px;
+    }
+
+    .status-dot.loading { background: #f59e0b; animation: pulse 1.2s ease-in-out infinite; }
+    .status-dot.ready   { background: var(--pen-color); }
+
+    @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+    }
+
+    /* Save button */
+    .save-btn {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: lowercase;
+    transition: opacity 0.15s, transform 0.1s;
+    margin-top: auto;
+    }
+
+    .save-btn:hover:not(:disabled) { opacity: 0.88; transform: scale(0.98); }
+    .save-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    /* ─── Canvas area ───────────────────────────── */
+    #canvas-area {
+    aspect-ratio: 4/3;
+    flex: none;
+    max-height: calc(100vh - 200px); 
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border); 
+    border-radius: 8px;
+    }
+
+    /* p5 puts a <canvas> inside here — make it fill the area */
+    #canvas-area canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+    }
+
+    /* ─── Photostrip screen ─────────────────────── */
+    #photostrip-screen {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    overflow-y: auto;
+    }
+
+    #photostrip-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes slideUp {
+    from { transform: translateY(60px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+    }
+
+    /* Photo booth machine top */
+    #booth-top {
+    width: 280px;
+    background: var(--film-machine);
+    border-radius: 14px 14px 0 0;
+    padding: 14px 20px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #444;
+    border-bottom: none;
+    }
+
+    #booth-logo {
+    font-size: 12px;
+    font-weight: 700;
+    color: #aaa;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    }
+
+    #booth-lens {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #555, #111);
+    border: 3px solid #555;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.8), 0 0 0 2px #333;
+    }
+
+    /* Strip slot */
+    #strip-slot {
+    width: 280px;
+    height: 14px;
+    background: #111;
+    border-left: 2px solid #444;
+    border-right: 2px solid #444;
+    position: relative;
+    overflow: hidden;
+    }
+
+    #strip-slot-line {
+    position: absolute;
+    inset: 5px 12px;
+    border-radius: 2px;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent, transparent 4px,
+        rgba(255,255,255,0.06) 4px, rgba(255,255,255,0.06) 5px
+    );
+    }
+
+    /* The photostrip itself */
+    #photostrip {
+    width: 280px;
+    background: var(--film-cream);
+    border: 2px solid var(--film-border);
+    border-top: none;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px var(--film-shadow), 0 4px 12px rgba(0,0,0,0.3);
+    animation: stripOut 0.6s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+    transform-origin: top center;
+    }
+
+    @keyframes stripOut {
+    from { transform: scaleY(0.1); opacity: 0; }
+    to   { transform: scaleY(1);   opacity: 1; }
+    }
+
+    #strip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px 6px;
+    border-bottom: 1px dashed var(--film-border);
+    }
+
+    .strip-brand {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--strip-accent);
+    text-transform: uppercase;
+    }
+
+    .strip-date {
+    font-size: 9px;
+    color: #999;
+    letter-spacing: 0.5px;
+    }
+
+    /* The image inside the strip */
+    #strip-image-frame {
+    margin: 10px 14px;
+    border: 3px solid #c8b99a;
+    border-radius: 2px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    background: #000;
+    position: relative;
+    }
+
+    #strip-image-frame canvas,
+    #strip-image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    }
+
+    #strip-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 8px 12px;
+    border-top: 1px dashed var(--film-border);
+    }
+
+    .strip-tagline {
+    font-size: 9px;
+    color: #aaa;
+    letter-spacing: 1px;
+    text-align: center;
+    }
+
+    /* Film sprocket holes */
+    .sprocket {
+    width: 14px;
+    height: 10px;
+    border: 1.5px solid var(--film-border);
+    border-radius: 2px;
+    background: transparent;
+    }
+
+    /* Action buttons */
+    #strip-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 280px;
+    }
+
+    .strip-btn {
+    font-family: inherit;
+    font-size: 12px;
+    padding: 9px 14px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: transparent;
+    color: #ccc;
+    cursor: pointer;
+    text-transform: lowercase;
+    transition: all 0.15s;
+    letter-spacing: 0.3px;
+    }
+
+    .strip-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .strip-btn.primary { background: #fff; color: #000; border-color: #fff; font-weight: 700; }
+    .strip-btn.primary:hover { background: #e8e8e8; }
+
+    /* ─── Gesture label overlay (drawn by p5) ───── */
+    #gesture-label {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    pointer-events: none;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    }
+    </style>
+</head>
+<body>
+    <nav>
+            <a href="https://m4ll1ka.github.io"><img src="https://m4ll1ka.github.io/docs/assets/images/melogopng.png" class="logo"></a>
+            <ul id="sidemenu">
+                <i class="fas fa-times" onclick="closemenu()"></i>
+                <li><a href="https://m4ll1ka.github.io/about.html">About</a></li>
+                <li><a href="https://m4ll1ka.github.io/work.html">Work</a></li>
+                <li><a href="https://m4ll1ka.github.io/play.html">Play</a></li>
+                <li><a href="https://m4ll1ka.github.io/contact.html">Contact</a></li>
+            </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
+    </nav>
+
+    <div id="tool-header">
+        <h2>Gesture Paint</h2>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+    SCREEN 1: DRAWING SCREEN
+    ════════════════════════════════════════ -->
+    <!-- Tool header -->
+    <div id="tool-body">
+    <!-- Canvas area: video feed + drawing layer stacked -->
+    <main id="canvas-area">
+      <!-- p5.js will inject its canvas here -->
+    </main>
+        <!-- Right toolbar -->
+    <aside id="toolbar">
+
+      <div class="tool-section">
+        <p class="tool-section-label">tools</p>
+
+        <div class="tool-card active" id="tool-pen">
+          <div class="gesture-icon">☝️</div>
+          <div class="tool-info">
+            <span class="tool-name">pen</span>
+            <span class="tool-hint">index finger up</span>
+          </div>
+          <div class="active-dot"></div>
+        </div>
+
+        <div class="tool-card" id="tool-eraser">
+          <div class="gesture-icon">🖐️</div>
+          <div class="tool-info">
+            <span class="tool-name">eraser</span>
+            <span class="tool-hint">open hand</span>
+          </div>
+          <div class="active-dot"></div>
+        </div>
+
+        <div class="tool-card" id="tool-none">
+          <div class="gesture-icon">✊</div>
+          <div class="tool-info">
+            <span class="tool-name">pause</span>
+            <span class="tool-hint">make a fist</span>
+          </div>
+          <div class="active-dot"></div>
+        </div>
+        <button id="clear-btn" class="action-btn">clear canvas</button>
+      </div>
+
+      <div class="tool-section status-section">
+        <p class="tool-section-label">status</p>
+        <div id="status-indicator">
+          <span class="status-dot loading"></span>
+          <span id="status-text">loading model...</span>
+        </div>
+      </div>
+
+      <button id="save-btn" class="save-btn" disabled>
+        📸 save photo
+      </button>
+    </aside>
+
+</div>
+
+  <!-- ═══════════════════════════════════════
+       SCREEN 2: PHOTOSTRIP SCREEN
+  ════════════════════════════════════════ -->
+  <div id="photostrip-screen" class="hidden">
+    <div id="photostrip-wrapper">
+
+      <!--photo booth machine top -->
+      <div id="booth-top">
+        <div id="booth-logo">📸 gesturebooth</div>
+        <div id="booth-lens"></div>
+      </div>
+
+      <!-- The strip slot where the photo "comes out" -->
+      <div id="strip-slot">
+        <div id="strip-slot-line"></div>
+      </div>
+
+      <!-- The actual photostrip -->
+      <div id="photostrip">
+        <div id="strip-header">
+          <span class="strip-brand">GESTURE PAINT™</span>
+          <span class="strip-date" id="strip-date"></span>
+        </div>
+        <div id="strip-image-frame">
+          <!-- snapshot canvas will be inserted here -->
+        </div>
+        <div id="strip-footer">
+          <div class="sprocket left"></div>
+          <span class="strip-tagline">✦ made with your hands ✦</span>
+          <div class="sprocket right"></div>
+        </div>
+      </div>
+
+      <!-- Action buttons below the strip -->
+      <div id="strip-actions">
+        <button id="download-btn" class="strip-btn primary">⬇ download</button>
+        <button id="share-btn"    class="strip-btn">🔗 copy link</button>
+        <button id="back-btn"     class="strip-btn">↩ draw again</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="sketch.js"></script>
+  <script src="photostrip.js"></script>
+</body>
+</html>
